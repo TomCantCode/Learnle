@@ -1,18 +1,25 @@
 
 <?php
 
-    //Variables for db connection
+    //Display any hidden errors
+    ini_set('display_errors', true);
+    ini_set('display_startup_errors', true);
+    error_reporting(E_ALL);
 
+    //Variables for db connection
     $USERNAME = 'root';
     $HOST = 'localhost';
     $PASSWORD = 'password';
-    $DATABASE = 'learnle_db';
+    $DATABASE = 'learnle';
 
-    $CONNECT = mysqli_connect($HOST, $USERNAME, $PASSWORD, $DATABASE);
+    //Connect to the database
+    $CONNECT = mysqli_connect($HOST, $USERNAME, $PASSWORD, $DATABASE, 3308);
 
+    //Check connection
+    if (!$CONNECT) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+    echo "Connected successfully";
 
-    if(mysqli_connect_errno()) {
-        exit('Error: '.mysqli_connect_error());
-    }
 
 ?>

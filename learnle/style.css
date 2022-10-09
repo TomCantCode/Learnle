@@ -48,7 +48,7 @@ pre{
     margin: 0px;
 }
 
-#board{
+.board{
     box-sizing: border-box;
     margin: 0px 50px 75px;
     padding: 10px;
