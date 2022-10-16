@@ -1,47 +1,119 @@
-header{
-    position: relative;
-    margin: 25px;
 
-    background: #2C4031;
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&family=Outfit:wght@300&display=swap');
+
+:root {
+  --accent1: #2C4031;
+  --accent2: #2B5937;
+  --accent3: #2c403b;
+  --textcol: #BEBEBE;
+  --titlecol: #595959;
+}
+
+header{
+    position: sticky;
+    height: 80px;
+    margin: auto;
+    width: 90%;
+    min-width: 350px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px;
+
+    /*background: var(--accent1);*/
+    background: var(--accent3);
+    background: linear-gradient(180deg, var(--accent1) 33%, var(--accent3) 80%);
     border-radius: 15px;
 }
 
-h1{
-    position: relative;
-    margin-left: 5%;
-
-    font-family: 'Oleo Script';
+header .menuleft{
+    float: left;
+    
+    margin: 0px;
+    font-family: 'Oleo Script', 'sans-serif';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 48px;
     line-height: 55px;
-    text-align: left;
+    text-align: center;
+    height: 100%;
+    
+    color: var(--titlecol);
 
-    color: #BEBEBE;
+}
+
+header .menuleft .logo {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    background: url(images/logo.png);
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+}
+
+header .menuleft div {
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(45%,-50%);
+}
+
+.menumiddle{
+    margin-left: 10px;
+    padding-top: 25px;
+    padding-left: 50px;
+    position: absolute;
+    width: 40%;
+    left: 50%;
+    transform: translate(-45%);
+}
+
+@media screen and (max-width: 690px) {
+  .menumiddle{
+    display: none;
+  }
+}
+
+header .menumiddle .searchbar {  
+  font-family: 'Outfit', sans-serif;
+  min-width: 50px;
+  height: 36px;
+  width: 100%;
+}
+
+header .menuright{
+    padding-top: 10px;
+    float: right;    
+}
+
+header .menuright div {
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%,-50%);
 }
 
 h2{
     position: relative;
-    margin: auto 50px 0px;
+    margin: auto;
 
-    font-family: 'Oleo Script';
+    font-family: 'Oleo Script', 'sans-serif';
     font-style: normal;
-    font-weight: 350;
-    font-size: 32px;
+    font-weight: 250;
+    font-size: 30px;
     line-height: 55px;
-    text-align: left;
+    text-align: center;
 
-    color: #BEBEBE;
+    color: var(--textcol);
 }
 
 body{
     background: url(images/wood.svg);
-    font-family: 'Outfit';
+    font-family: 'Outfit', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 30px;
-    color: #BEBEBE;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--textcol);
 }
 
 pre{
@@ -50,7 +122,19 @@ pre{
 
 .board{
     box-sizing: border-box;
-    margin: 0px 50px 75px;
+    margin: 0px 50px 50px;
+    padding: 10px;
+    
+    position: relative;
+    text-align: left;
+
+    background: url(images/chalkboard.jpg);
+    border: 4px solid var(--accent2)
+}
+
+.largeboard{
+    box-sizing: border-box;
+    margin: 0px 50px 50px;
     padding: 10px;
     
     position: relative;
@@ -58,5 +142,38 @@ pre{
     text-align: left;
 
     background: url(images/chalkboard.jpg);
-    border: 4px solid #2C4031;
+    border: 4px solid var(--accent2)
 }
+
+.homeboard{
+    box-sizing: border-box;
+    margin: 0px 15px 50px;
+    padding: 10px;
+    
+    position: relative;
+    /*height: 800px;*/
+    width: 35%;
+    min-height: 800px;
+    min-width: 150px;
+    text-align: left;
+
+    background: url(images/chalkboard.jpg);
+    background-position: left bottom;
+    border-radius: 5px;
+    border: 4px solid var(--accent2);
+}
+
+.groupboard{
+    box-sizing: border-box;
+    margin: auto;
+    display: flex;
+    align-items: stretch;
+}
+
+footer{
+  background: var(--accent1);
+  padding: 10px;
+  margin: 0px;
+  font-size: 15px;
+}
+
