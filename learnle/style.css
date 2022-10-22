@@ -177,3 +177,26 @@ footer{
   font-size: 15px;
 }
 
+a:link {
+    font-size: 15px;
+    color: var(--textcol);
+    text-decoration: none;
+}
+
+a:visited {
+    font-size: 15px;
+    color: var(--textcolb);
+    text-decoration: bold;
+}
+
+a:hover {
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+a:active {
+    font-size: 15px;
+    color: var(--textcol);
+    text-decoration: none;
+}
+
