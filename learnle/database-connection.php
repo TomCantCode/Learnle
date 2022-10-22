@@ -11,10 +11,9 @@
     $HOST = 'localhost';
     $PASSWORD = 'password';
     $DATABASE = 'learnle';
-    $ROOT = '3306';
 
     //Connect to the database
-    $CONNECT = mysqli_connect($HOST, $USERNAME, $PASSWORD, $DATABASE, $ROOT);
+    $CONNECT = mysqli_connect($HOST, $USERNAME, $PASSWORD, $DATABASE, 3306);
 
     //Check connection
     if (!$CONNECT) {
