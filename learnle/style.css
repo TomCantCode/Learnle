@@ -92,6 +92,67 @@
     transform: translate(-100%,-50%);
 }
 
+.menusmall{
+    position: sticky;
+    height: 60px;
+    margin: auto;
+    width: 90%;
+    min-width: 350px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding: 5px;
+
+    /*background: var(--accent1);*/
+    background: var(--accent3);
+    background: linear-gradient(180deg, var(--accent1) 33%, var(--accent3) 80%);
+    border-radius: 10px;
+}
+
+.menusmall .menuleft{
+    float: left;
+    
+    margin: 0px;
+    font-family: 'Oleo Script', 'sans-serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 55px;
+    text-align: center;
+    height: 100%;
+    
+    color: var(--titlecol);
+
+}
+
+.menusmall .menuleft .logo {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    background: url(images/logo.png);
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+}
+
+.menusmall .menuleft div {
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translate(45%,-50%);
+}
+
+
+.menusmall .menuright{
+    padding-top: 10px;
+    float: right;    
+}
+
+.menusmall .menuright div {
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%,-50%);
+}
+
 h2{
     position: relative;
     margin: auto;

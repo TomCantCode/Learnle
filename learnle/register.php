@@ -52,11 +52,9 @@
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<header>
-  <h1>
-    Learnle
-  </h1>
-</header>
+<?php
+  include 'menu-small.php';
+?>
 
 <h2>
   Create an Account:
