@@ -65,7 +65,7 @@ commodo rhoncus.</p>
 </body>
 
 <footer>
-  Stuff down here
+  <a href="credits.html"  target="_blank">Credits and Details</a>
 </footer>
   
 </html>

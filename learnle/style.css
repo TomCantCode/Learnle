@@ -9,7 +9,7 @@
   --titlecol: #595959;
 }
 
-header{
+.menu{
     position: sticky;
     height: 80px;
     margin: auto;
@@ -25,7 +25,7 @@ header{
     border-radius: 15px;
 }
 
-header .menuleft{
+.menu .menuleft{
     float: left;
     
     margin: 0px;
@@ -41,7 +41,7 @@ header .menuleft{
 
 }
 
-header .menuleft .logo {
+.menu .menuleft .logo {
     position: absolute;
     top: 50%;
     transform: translate(0,-50%);
@@ -51,7 +51,7 @@ header .menuleft .logo {
     padding: 10px;
 }
 
-header .menuleft div {
+.menu .menuleft div {
     padding: 10px;
     position: absolute;
     top: 50%;
@@ -74,19 +74,19 @@ header .menuleft div {
   }
 }
 
-header .menumiddle .searchbar {  
+.menu .menumiddle .searchbar {  
   font-family: 'Outfit', sans-serif;
   min-width: 50px;
   height: 36px;
   width: 100%;
 }
 
-header .menuright{
+.menu .menuright{
     padding-top: 10px;
     float: right;    
 }
 
-header .menuright div {
+.menu .menuright div {
     position: absolute;
     top: 50%;
     transform: translate(-100%,-50%);
