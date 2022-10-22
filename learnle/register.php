@@ -56,13 +56,15 @@
   include 'menu-small.php';
 ?>
 
-<h2>
-  Create an Account:
-</h2>
 
 <body>
 
   <div class = "largeboard">
+    
+    <h2>
+      Create an Account:
+    </h2>
+
     <pre>
       <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 

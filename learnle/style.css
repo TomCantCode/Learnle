@@ -100,7 +100,7 @@
     width: 90%;
     min-width: 350px;
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     padding: 5px;
 
     /*background: var(--accent1);*/
@@ -235,6 +235,7 @@ pre{
 
 footer{
   background: var(--accent1);
+  padding-bottom: 300px;
   padding: 10px;
   margin: 0px;
   font-size: 15px;
