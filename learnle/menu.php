@@ -16,8 +16,8 @@
   
     <div class = "menuright">
         <div>
-          <a href="login.html" target="_blank">Login</a><br>
-          <a href="register.html" target="_blank">Register</a><br>
+          <a href="login.php" target="_blank">Login</a><br>
+          <a href="register.php" target="_blank">Register</a><br>
         </div>
     </div>
   </div>
