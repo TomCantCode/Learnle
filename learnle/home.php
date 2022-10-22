@@ -8,26 +8,16 @@
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<header>
-  
-  <div class = "menuleft">
-    <img class = "logo" src = "images/logo.png" height = "60px" width = "60px">
-    <div>Learnle</div>
-  </div>
 
-  <div class = "menumiddle">
-    <input type = "search" placeholder = "Search for a set" class = "searchbar">
-  </div>
-  
-  <div class = "menuright">
-      <div>Login<br>
-      Register</div>
-  </div>
-  
-</header>
 
 <body>
 
+
+
+  <?php
+    include 'menu.php'
+  ?>
+  
   <div class = "groupboard">
     
     <div class = "homeboard">
