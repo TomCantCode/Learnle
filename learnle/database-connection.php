@@ -9,7 +9,7 @@
     //Variables for db connection
     $USERNAME = 'root';
     $HOST = 'localhost';
-    $PASSWORD = 'password';
+    $PASSWORD = null;
     $DATABASE = 'learnle';
 
     //Connect to the database
