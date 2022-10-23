@@ -10,33 +10,48 @@
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
     $USERNAME = $_POST["name"];
+    $EMAIL = $_POST["email"];
     $PASSWORD = $_POST["password"];
 
-    //All error checking
+  //All error checking
     $errors = false;
 
-    //Checks if username exists
-    $QUERYREAD = "SELECT * FROM acctbl WHERE Email = '$USERNAME'";
+    //Fetches the Username, email and password from the database
+    $QUERYREAD = "SELECT AccName, Email, AccType, Password FROM acctbl WHERE Email = '$EMAIL'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+    $ROW = mysqli_fetch_assoc($SQLREAD);
 
+    //If there are no results from the database,
     if(mysqli_num_rows($SQLREAD) == 0) {
-      $output = "No registered User has that name";
+      $output = "Incorrect Username, email or passworda";
       $errors = true;
     }
 
-
-
-    //If no errors have occured the variables are set to the database
-    if($errors == false) {
-      $PASSWORD = $PASSWORD;//Hashing here
-      $QUERYADD = "INSERT INTO acctbl (AccName, Email, DOB, AccType, Password) VALUES ('$USERNAME', '$EMAIL', '$DOB', '$ACCTYPE', '$PASSWORD')";
-
-      if(mysqli_query($CONNECT, $QUERYADD)) {
-        $output = "Account added!";
-      }
+    //If the Usernames doesn't match,
+    if($ROW['AccName'] != $USERNAME) {
+      $output = "Incorrect Username, email or passwordb";
+      $errors = true;
     }
 
-    $_SESSION["username"] = $USERNAME;
+    //If the passwords doesn't match,
+    if($ROW['Password'] != $PASSWORD) {
+      $output = "Incorrect Username, email or passwordc";
+      echo $ROW['Password']. '<br>' .$PASSWORD;
+      $errors = true;
+    }
+
+    //If no errors have occured the variables are set to the session variables, then returns to homepage
+    if($errors == false) {
+      $_SESSION["username"] = $USERNAME;
+      $_SESSION["type"] = $ROW["AccType"];
+      $_SESSION["loggedin"] = TRUE;
+      $output = "Signed In!";
+
+      header('Location: home.php');
+      exit;
+
+    }
+
 
   }
   
@@ -76,6 +91,7 @@
       <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
         Name:               <input type= "text" id= "name" name= "name" required><br>
+        Email:              <input type= "text" id= "email" name= "email" required><br>
         Password:           <input type= "password" id= "password" name= "password" required><br>
         <input type= "submit" value= "Confirm" name= "confirm">   <input type= "reset" required>
 

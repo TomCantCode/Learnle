@@ -31,7 +31,7 @@
     <div class = "menuright">
         <div>
           <?php if(isset($_SESSION["username"])) {
-            echo '<p> Welcome, '. $_SESSION["username"] . '</p><br>
+            echo '<pre> Welcome '. $_SESSION["username"] . '</pre><br>
             <a href="logout.php" target="_self">Logout</a><br>';
           }
           else {
