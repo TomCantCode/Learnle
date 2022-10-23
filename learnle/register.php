@@ -66,10 +66,16 @@
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<?php
-  include 'menu-small.php';
-?>
-
+<div class = "menusmall">
+    <div class = "menuleft">
+      <a href = "home.php">
+        <img class = "logo" src = "images/logo.png" height = "40px" width = "40px">
+      </a>
+      
+      <div>Learnle</div>
+    </div>
+  
+  </div>
 
 <body>
 
