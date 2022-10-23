@@ -50,6 +50,8 @@
       }
     }
 
+    $_SESSION["username"] = $USERNAME;
+
   }
   
 ?>
@@ -80,16 +82,16 @@
     <pre>
       <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
-        Name:               <input type= "text" id= "name" name= "name"><br>
-        E-mail:             <input type= "text" id= "email" name= "email"><br>
-        Date of Birth:      <input type= "date" id= "dob" name= "dob"><br>
-        Account Type:       <select id= "acctype" name= "acctype">
+        Name:               <input type= "text" id= "name" name= "name" required><br>
+        E-mail:             <input type= "text" id= "email" name= "email" required><br>
+        Date of Birth:      <input type= "date" id= "dob" name= "dob" required><br>
+        Account Type:       <select id= "acctype" name= "acctype" required>
           <option value= "s">Student</option>
           <option value= "t">Teacher</option>
         </select><br>
-        Password:           <input type= "password" id= "password" name= "password"><br>
-        Confirm Password:   <input type= "password" id= "cpassword" name= "cpassword"><br><br>
-        <input type= "submit" value= "Confirm" name= "confirm">   <input type= "reset">
+        Password:           <input type= "password" id= "password" name= "password" required><br>
+        Confirm Password:   <input type= "password" id= "cpassword" name= "cpassword" required><br><br>
+        <input type= "submit" value= "Confirm" name= "confirm">   <input type= "reset" required>
 
         <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
