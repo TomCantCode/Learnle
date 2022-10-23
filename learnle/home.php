@@ -1,7 +1,7 @@
 
 <?php
   session_start();
-  
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Homepage</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="images/logo.png" type="image">
 </head>
 
 <div class = "menu">
@@ -29,8 +30,16 @@
   
     <div class = "menuright">
         <div>
-          <a href="login.php" target="_blank">Login</a><br>
-          <a href="register.php" target="_blank">Register</a><br>
+          <?php if(isset($_SESSION["username"])) {
+            echo '<p> Welcome, '. $_SESSION["username"] . '</p><br>
+            <a href="logout.php" target="_self">Logout</a><br>';
+          }
+          else {
+            echo '<a href="login.php" target="_blank">Login</a><br>
+          <a href="register.php" target="_blank">Register</a><br>';
+          }
+          
+          ?>
         </div>
     </div>
   </div>
