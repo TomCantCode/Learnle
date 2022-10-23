@@ -1,11 +1,13 @@
 <?php
-  //includes connection to the database
+
+  //Includes connection to the database
   include "database-connection.php";
 
   $CONNECT;
 
   session_start();
 
+  //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
     $USERNAME = $_POST["name"];
     $EMAIL = $_POST["email"];
@@ -14,6 +16,7 @@
     $PASSWORD = $_POST["password"];
     $CPASSWORD = $_POST["cpassword"];
 
+    //All error checking
     $errors = false;
 
     if($PASSWORD != $CPASSWORD) {
@@ -21,6 +24,14 @@
       $errors = true;
     }
 
+    $TODAY = date("Y-m-d");
+
+    if($DOB >= $TODAY) {
+      $output = "Date of Birth is invalid";
+      $errors = true;
+    }
+
+    //Fetches any duplicate email addresses
     $QUERYREAD = "SELECT * FROM acctbl WHERE Email = '$EMAIL'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
 
@@ -29,6 +40,7 @@
       $errors = true;
     }
 
+    //If no errors have occured the variables are set to the database
     if($errors == false) {
       $PASSWORD = $PASSWORD;//Hashing here
       $QUERYADD = "INSERT INTO acctbl (AccName, Email, DOB, AccType, Password) VALUES ('$USERNAME', '$EMAIL', '$DOB', '$ACCTYPE', '$PASSWORD')";
