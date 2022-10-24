@@ -16,6 +16,7 @@
 </head>
 
 <div class = "menu">
+
     <div class = "menuleft">
       <a href = "home.php">
         <img class = "logo" src = "images/logo.png" height = "60px" width = "60px">
@@ -31,18 +32,19 @@
     <div class = "menuright">
         <div>
           <?php if(isset($_SESSION["username"])) {
-            echo '<pre> Welcome '. $_SESSION["username"] . '</pre><br>
+            echo '<pre> Welcome '. $_SESSION["username"] . '</pre>
             <a href="logout.php" target="_self">Logout</a><br>';
           }
           else {
-            echo '<a href="login.php" target="_blank">Login</a><br>
-          <a href="register.php" target="_blank">Register</a><br>';
+            echo '<a href="login.php" target="_self">Login</a><br>
+          <a href="register.php" target="_self">Register</a><br>';
           }
           
           ?>
         </div>
     </div>
-  </div>
+
+</div>
 
 <body>
   

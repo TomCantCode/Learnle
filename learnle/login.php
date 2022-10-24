@@ -69,6 +69,7 @@
 </head>
 
 <div class = "menusmall">
+
     <div class = "menuleft">
       <a href = "home.php">
         <img class = "logo" src = "images/logo.png" height = "40px" width = "40px">
@@ -77,7 +78,14 @@
       <div>Learnle</div>
     </div>
   
-  </div>
+    <div class = "menuright">
+        <div>
+          <pre>Don't have an Account?</pre>
+          <a href="register.php" target="_self">Register</a><br>
+        </div>
+    </div>
+
+</div>
 
 <body>
 
