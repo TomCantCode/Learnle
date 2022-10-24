@@ -7,9 +7,6 @@
   --accent3: #2c403b;
   --textcol: #BEBEBE;
   --titlecol: #595959;
-
-  --box-width: 50px;
-  --centre-pos: 30%;
 }
 
 .menu{
@@ -272,6 +269,22 @@ a:active {
 
 /*Game css*/
 
+:root{
+    --defaultbg: #000000;
+    --defaultbd: #ffffff;
+    --fullbg: #121111;
+    --fullbd: #ffffff;
+    --correctbg: #238649;
+    --correctbd: #46b969;
+    --incorrectbg: #9e9034;
+    --incorrectbd: #a09446;
+    --wrongbg: #c32828;
+    --wrongbd: #a01c1c;
+
+    --box-width: 50px;
+    --centre-pos: 30%;
+}
+
 #grid-container {
     display: grid;
     margin: auto;
@@ -283,46 +296,32 @@ a:active {
   }
   
   .square {
-    border: solid 1px var(--accent3);
+    background: var(--defaultbg);
+    border: solid 1px var(--defaultbd);
     color: var(--textcol);
-    text-align: center;
     font-size: 40px;
     margin: 2px;
     width: var(--box-width);
     height: 50px;
-    background: #000000;
+  }
+
+  .full {
+    background: var(--fullbg);
+    border: var(--fullbd);
   }
   
   .correct {
-    background: #59c5a1;
-    border: solid 1px #46b969 ;
-    color: #000000;
-    text-align: center;
-    font-size: 40px;
-    margin: 2px;
-    width: var(--box-width);
-    height: 50px;
+    background: var(--correctbg);
+    border: var(--correctbd);
   }
   
   .wrong {
-    background: #c0b154;
-    border: solid 1px #a09446 ;
-    color: #000000;
-    text-align: center;
-    font-size: 40px;
-    margin: 2px;
-    width: var(--box-width);
-    height: 50px;
+    background: var(--incorrectbg);
+    border: var(--incorrectbd);
   }
   
   .incorrect {
-    background: #c32828;
-    border: solid 1px #a01c1c ;
-    color: #000000;
-    text-align: center;
-    font-size: 40px;
-    margin: 2px;
-    width: var(--box-width);
-    height: 50px;
+    background: var(--wrongbg);
+    border: var(--wrongbd);
   }
 

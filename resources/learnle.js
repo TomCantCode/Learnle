@@ -17,7 +17,7 @@ function create_grid(name, x, y) {
   for (var a = 0; a < total; a++) {
     var square = document.createElement('div');
     square.setAttribute('id', a)
-    square.className = 'square';
+    square.className += 'square';
     grid.appendChild(square);
   }
 
@@ -54,15 +54,15 @@ function grid_add_string(name, string, row) {
 
 
     if (newValue == ANSWER.charAt(a)) {
-      gridNum.style.background = '#59c5a1';
+      gridNum.className += 'correct';
     }
 
     else if (ANSWER.includes(newValue)) {
-      gridNum.style.background = '#c0b154';
+      gridNum.className += 'incorrect';
     }
 
     else {
-      gridNum.style.background = '#c32828';
+      gridNum.className += 'wrong';
     }
 
   };
@@ -70,7 +70,7 @@ function grid_add_string(name, string, row) {
   if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER || GUESSNUM == (MAXGUESSES - 1)) {
     FREEZE = true;
     reset_grid('grid-container');
-    alert("yes");
+    alert('yes');
   };
 
 };
@@ -86,17 +86,19 @@ const legalInputs =
 
 
 window.addEventListener('keydown', function(event) {
+  
   if ((event.key == 'Backspace') && squareNum > GUESSNUM * ANSWER.length) {
     squareNum -= 1;
     document.getElementById(squareNum).innerHTML = '';
-    document.getElementById(squareNum).style.background = '#000000';
-    document.getElementById(squareNum).style.border = 'solid 1px #908484';
+    gridNum = document.getElementById(a + (String(GUESSES[GUESSNUM]).replace(undefined, '').length * (GUESSNUM)));
+    gridNum.className += 'square';
   }
 
   if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
-    document.getElementById(squareNum).style.background = '#121111';
-    document.getElementById(squareNum).style.border = 'solid 1px #ffffff';
     document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
+    gridNum = document.getElementById(a + (String(GUESSES[GUESSNUM]).replace(undefined, '').length * (GUESSNUM)));
+    gridNum.className += 'full';
+    
     squareNum += 1;
   }
 
@@ -126,8 +128,8 @@ window.addEventListener('keydown', function(event) {
 
 
 //check out require.js to make this work
-//var Typo = require("Typo.js-master/typo/typo-js");
-//var dictionary = new Typo("en_US", false, false, { dictionaryPath: "Typo.js-master/typo/dictionaries" });
+//var Typo = require('Typo.js-master/typo/typo-js');
+//var dictionary = new Typo('en_US', false, false, { dictionaryPath: 'Typo.js-master/typo/dictionaries' });
 
 
 
@@ -141,7 +143,7 @@ create_grid('grid-container', MAXGUESSES, ANSWER.length);
   
   
 //function check(){
-//  alert("help me please kwgjlargjerko")
+//  alert('help me please kwgjlargjerko')
 //  if (FREEZE == false) {
 //    var ANSWER = TERMS[l];
  //   var MAXGUESSES = ANSWER.length + 1;                          
