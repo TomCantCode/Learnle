@@ -32,9 +32,14 @@ function create_grid(name, x, y) {
 function reset_grid(name) {
   document.getElementById(name).innerHTML = '';
   l++;
-  var ANSWER = TERMS[l];
+  ANSWER = TERMS[l];
   squareNum = 0;
-  var MAXGUESSES = ANSWER.length + 1;   
+  GUESSNUM = -1;
+  GUESSES = [''];
+  MAXGUESSES = ANSWER.length + 1;   
+  if (l >= TERMS.length) {
+    end()
+  }
   create_grid('grid-container', MAXGUESSES, ANSWER.length);
   
 };
@@ -70,6 +75,10 @@ function grid_add_string(name, string, row) {
 
 };
 
+function end() {
+  alert('Set complete!!')
+};
+
 
 var squareNum = 0;
 const legalInputs =
@@ -93,37 +102,43 @@ window.addEventListener('keydown', function(event) {
 
   if (event.code == 'Enter') {
 
-    if ((squareNum - (GUESSNUM * ANSWER.length)) == ANSWER.length) {
-
-      for (var i = 0; i < ANSWER.length; i++) {
-        GUESSES[GUESSNUM] += (document.getElementById(i + (ANSWER.length * (GUESSNUM))).innerHTML);
+    var trialGuess = '';
+    for (var i = 0; i < ANSWER.length; i++) {
+        trialGuess += (document.getElementById(i + (ANSWER.length * (GUESSNUM))).innerHTML);
       }
 
-     GUESSES[GUESSNUM].replace(undefined, '')
+    
+    if (((squareNum - (GUESSNUM * ANSWER.length)) == ANSWER.length) /*&& (dictionary.check(trialGuess.replace(undefined, '')))*/) {
+
+      GUESSES[GUESSNUM] = trialGuess.replace(undefined, '');
+      
 
       grid_add_string('grid-container', String(GUESSES[GUESSNUM]).replace(undefined, ''), GUESSNUM);
       GUESSNUM += 1;
     }
 
     else {
-      alert('Invalid length of guess')
+      alert('Invalid length of guess');
     }
   }
 
 }, false);
 
 
+//check out require.js to make this work
+//var Typo = require("Typo.js-master/typo/typo-js");
+//var dictionary = new Typo("en_US", false, false, { dictionaryPath: "Typo.js-master/typo/dictionaries" });
+
+
+
 var MAXGUESSES = 0;
 var l = 0;
 
 var ANSWER = TERMS[l];
-var MAXGUESSES = ANSWER.length + 1;   
+MAXGUESSES = ANSWER.length + 1;   
 create_grid('grid-container', MAXGUESSES, ANSWER.length);
 
   
-
-   
-
   
 //function check(){
 //  alert("help me please kwgjlargjerko")

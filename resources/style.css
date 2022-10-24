@@ -7,6 +7,9 @@
   --accent3: #2c403b;
   --textcol: #BEBEBE;
   --titlecol: #595959;
+
+  --box-width: 50px;
+  --centre-pos: 30%;
 }
 
 .menu{
@@ -265,4 +268,61 @@ a:active {
     color: var(--textcol);
     text-decoration: none;
 }
+
+
+/*Game css*/
+
+#grid-container {
+    display: grid;
+    margin: auto;
+    margin-top: 150px;
+    justify-content: center;
+    position: relative;
+    width: 33%;
+    margin-bottom: 50px;
+  }
+  
+  .square {
+    border: solid 1px var(--accent3);
+    color: var(--textcol);
+    text-align: center;
+    font-size: 40px;
+    margin: 2px;
+    width: var(--box-width);
+    height: 50px;
+    background: #000000;
+  }
+  
+  .correct {
+    background: #59c5a1;
+    border: solid 1px #46b969 ;
+    color: #000000;
+    text-align: center;
+    font-size: 40px;
+    margin: 2px;
+    width: var(--box-width);
+    height: 50px;
+  }
+  
+  .wrong {
+    background: #c0b154;
+    border: solid 1px #a09446 ;
+    color: #000000;
+    text-align: center;
+    font-size: 40px;
+    margin: 2px;
+    width: var(--box-width);
+    height: 50px;
+  }
+  
+  .incorrect {
+    background: #c32828;
+    border: solid 1px #a01c1c ;
+    color: #000000;
+    text-align: center;
+    font-size: 40px;
+    margin: 2px;
+    width: var(--box-width);
+    height: 50px;
+  }
 
