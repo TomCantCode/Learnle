@@ -153,8 +153,16 @@
     top: 50%;
     transform: translate(-100%,-50%);
     text-align: right;
-    font-size: 15px;
-    
+    font-size: 15px;  
+}
+
+.menusmall .menuright p {
+    width: 250px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%,-50%);
+    text-align: left;
+    font-size: 15px;  
 }
 
 h2{
@@ -233,6 +241,17 @@ pre{
     margin: auto;
     display: flex;
     align-items: stretch;
+}
+
+.term{
+    margin: 0px 20px;
+    height: 150px;
+    padding: 10px;
+    position: relative;
+    text-align: left;
+
+    background: var(--fullbg);
+    opacity: 0.75;
 }
 
 footer{

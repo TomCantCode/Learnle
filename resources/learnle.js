@@ -132,7 +132,6 @@ window.addEventListener('keydown', function(event) {
 //var dictionary = new Typo('en_US', false, false, { dictionaryPath: 'Typo.js-master/typo/dictionaries' });
 
 
-
 var MAXGUESSES = 0;
 var l = 0;
 

@@ -60,7 +60,8 @@
         risus neque molestie metus, a tempus purus nisi ut neque. Morbi ullamcorper iaculis convallis. Sed
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
-     <br>image
+     <br>image<br>
+     <a href="game.php" target="_self">Play example game</a>
     </div>
 
     <div class = "homeboard">
@@ -73,7 +74,8 @@
         risus neque molestie metus, a tempus purus nisi ut neque. Morbi ullamcorper iaculis convallis. Sed
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
-     <br>image
+     <br>image<br>
+     <a href="creator.php" target="_self">Set Creator</a>
     </div>
 
     <div class = "homeboard">
