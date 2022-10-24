@@ -1,7 +1,7 @@
 <?php
 
   //Includes connection to the database
-  include "database-connection.php";
+  include "resources/database-connection.php";
 
   $CONNECT;
 
@@ -64,7 +64,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Sign In</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="resources/style.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="images/logo.png" type="image">
 </head>
 

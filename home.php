@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Homepage</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="resources/style.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="images/logo.png" type="image">
 </head>
 
@@ -33,7 +33,7 @@
         <div>
           <?php if(isset($_SESSION["username"])) {
             echo '<pre> Welcome '. $_SESSION["username"] . '</pre>
-            <a href="logout.php" target="_self">Logout</a><br>';
+            <a href="resources/logout.php" target="_self">Logout</a><br>';
           }
           else {
             echo '<a href="login.php" target="_self">Login</a><br>
