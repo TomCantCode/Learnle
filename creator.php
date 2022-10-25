@@ -98,7 +98,7 @@
     </h2>
 
     <pre>
-      <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
         Set Name:           <input type= "text" id= "setname" name= "setname" required><br>
         Tags:               <input type= "text" id= "tag" name= "tag1" required> <input type= "text" id= "tag" name= "tag2" required> <input type= "text" id= "tag" name= "tag3" required><br>
@@ -108,15 +108,17 @@
           <option value= "3">Complex Maths</option>
         </select><br>
         
+        Terms:              <input type = "button" value = " + " name = "addterm"> <input type = "button" value = " - " name = "removeterm">
+        
         <div id = 1 class = term>
             
         </div>
 
-        <script src="resources/learnle.js"></script>
+        <script src = "resources/learnle.js"></script>
 
-        <input type= "submit" value= "Save" name= "confirm">
-
-        <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
+        <input type = "submit" value = "Save set" name = "confirm">
+      
+        <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
     </pre>
       

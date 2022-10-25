@@ -211,7 +211,7 @@ pre{
     padding: 10px;
     
     position: relative;
-    height: 600px;
+    min-height: 600px;
     text-align: left;
 
     background: url(../images/chalkboard.jpg);
@@ -245,7 +245,7 @@ pre{
 
 .term{
     margin: 0px 20px;
-    height: 150px;
+    height: 100px;
     padding: 10px;
     position: relative;
     text-align: left;
