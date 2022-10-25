@@ -100,26 +100,23 @@
     <pre>
       <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
-        Set Name:           <input type= "text" id= "setname" name= "setname" required><br>
-        Tags:               <input type= "text" id= "tag" name= "tag1" required> <input type= "text" id= "tag" name= "tag2" required> <input type= "text" id= "tag" name= "tag3" required><br>
-        Account Type:       <select id= "keyboard" name= "keyboard" required><br>
+        Set Name:       <input type= "text" id= "setname" name= "setname" required>             <input type = "submit" value = "Save set" name = "confirm"><br>
+        Tags:           <input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br>
+        Keyboard Type:  <select id= "keyboard" name= "keyboard" required><br>
           <option value= "1">Alphabet</option>
           <option value= "2">Simple Maths</option>
           <option value= "3">Complex Maths</option>
         </select><br>
         
-        Terms:              <input type = "button" value = " + " name = "addterm"> <input type = "button" value = " - " name = "removeterm">
+        Terms:            <input type = "button" value = " + " name = "addterm"> <input type = "button" value = " - " name = "removeterm">  Number of Terms:  <div id = "termcount">0</div>
         
-        <div id = 1 class = term>
-            
-        </div>
-
-        <script src = "resources/learnle.js"></script>
-
-        <input type = "submit" value = "Save set" name = "confirm">
-      
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
+
+      <div class = "Termlist"></div>
+
+      <script src = "resources/learnle.js"></script>
+
     </pre>
       
   </div>
