@@ -97,7 +97,7 @@
 </body>
 
 <?php
-  include 'footer.php';
+  include 'resources/footer.php';
 ?>
   
 </html>
