@@ -90,15 +90,12 @@ window.addEventListener('keydown', function(event) {
   if ((event.key == 'Backspace') && squareNum > GUESSNUM * ANSWER.length) {
     squareNum -= 1;
     document.getElementById(squareNum).innerHTML = '';
-    gridNum = document.getElementById(a + (String(GUESSES[GUESSNUM]).replace(undefined, '').length * (GUESSNUM)));
-    gridNum.className += 'square';
+    document.getElementById(squareNum).className += 'square';
   }
 
   if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
     document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
-    gridNum = document.getElementById(a + (String(GUESSES[GUESSNUM]).replace(undefined, '').length * (GUESSNUM)));
-    gridNum.className += 'full';
-    
+    document.getElementById(squareNum).className += 'full';
     squareNum += 1;
   }
 
