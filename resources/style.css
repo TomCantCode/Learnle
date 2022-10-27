@@ -142,7 +142,6 @@
     transform: translate(45%,-50%);
 }
 
-
 .menusmall .menuright{
     padding-top: 10px;
     float: right;    
@@ -208,7 +207,7 @@ pre{
 .largeboard{
     box-sizing: border-box;
     margin: 0px 50px 50px;
-    padding: 10px;
+    padding: 10px 50px;
     
     position: relative;
     min-height: 600px;
@@ -216,6 +215,16 @@ pre{
 
     background: url(../images/chalkboard.jpg);
     border: 4px solid var(--accent2)
+}
+
+@media screen and (max-width: 530px) {
+    .largeboard{
+      padding: 10px 20px;
+    }
+}
+
+#termcount{
+    display: inline;
 }
 
 .homeboard{

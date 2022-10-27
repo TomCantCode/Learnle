@@ -6,9 +6,10 @@ function addTerm() {
     var term = document.createElement('div');
     term.setAttribute('id', TERMNUM);
     term.className += 'term';
-    var CONTENTS = 
+    var CONTENTS = <></>
 
-    document.getElementById(TERMNUM).innerHTML = 'CONTENTS';
+    document.getElementById(TERMNUM).innerHTML = CONTENTS;
+    document.getElementById('termcount').innerHTML = TERMNUM;
     
     document.getElementById("Termlist").appendChild(term);
 
@@ -17,6 +18,7 @@ function addTerm() {
 function removeTerm() {
     document.getElementById(TERMNUM).remove();
     TERMNUM -= 1;
+    document.getElementById('termcount').innerHTML = TERMNUM;
 }
 
 document.getElementById("addterm").addEventListener("click", addTerm());

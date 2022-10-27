@@ -97,27 +97,35 @@
       Create a Set:
     </h2>
 
-    <pre>
+    
       <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
-        Set Name:       <input type= "text" id= "setname" name= "setname" required>             <input type = "submit" value = "Save set" name = "confirm"><br>
-        Tags:           <input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br>
-        Keyboard Type:  <select id= "keyboard" name= "keyboard" required><br>
-          <option value= "1">Alphabet</option>
-          <option value= "2">Simple Maths</option>
-          <option value= "3">Complex Maths</option>
-        </select><br>
+        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
+        Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br><br>
+        Keyboard Type:&nbsp&nbsp<select id= "keyboard" name= "keyboard" required><br>
+            <option value= "1">Alphabet</option>
+            <option value= "2">Simple Maths</option>
+            <option value= "3">Complex Maths</option>
+          </select><br><br>
         
-        Terms:            <input type = "button" value = " + " name = "addterm"> <input type = "button" value = " - " name = "removeterm">  Number of Terms:  <div id = "termcount">0</div>
+        <br>Terms:          
+        Number of Terms: &nbsp&nbsp<input type = "button" value = " + " id = "addterm">&nbsp&nbsp<div id = "termcount">0</div>&nbsp&nbsp<input type = "button" value = " - " id = "removeterm">  
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
 
-      <div class = "Termlist"></div>
+      <div id = "termlist"><br>
 
-      <script src = "resources/learnle.js"></script>
+          <div class = "term" id = 1>
+            <br>Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp&nbsp&nbsp&nbsp Number of attempts:&nbsp&nbsp<input type= "number" id= "setname" name= "setname" required><br>
+            <br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" required>
+          </div>
 
-    </pre>
+      </div>
+      
+      <script src = "resources/terms.js"></script>
+
+    
       
   </div>
     
