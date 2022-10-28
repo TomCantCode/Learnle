@@ -8,7 +8,12 @@ function addTerm() {
     term.value = 'not null'
     term.className += 'term';
 
-    var CONTENTS = document.getElementById(TERMNUM-1).innerHTML;
+    var CONTENTS = `<div class = "num">Term `+TERMNUM+`:</div><br>
+    <div class = "row">
+      <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-`+TERMNUM+`" name= "termname-`+TERMNUM+`" required>&nbsp&nbsp&nbsp&nbsp</div>
+      <div class = "row">Number of attempts:&nbsp&nbsp<input type= "number" id= "attempts-`+TERMNUM+`" name= "attempts-`+TERMNUM+`" required><br></div>
+    </div>
+    <div class = "row"><br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "def-`+TERMNUM+`" name= "def-`+TERMNUM+`" required></div>`;
     
     term.innerHTML = CONTENTS;
     document.getElementById('termcount').innerHTML = TERMNUM;

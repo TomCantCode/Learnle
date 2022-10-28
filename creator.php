@@ -108,7 +108,12 @@
             <option value= "3">Complex Maths</option>
           </select><br><br>
         
-        <br>Number of Terms: &nbsp&nbsp<input type = "button" value = " + " id = "addterm">&nbsp&nbsp<div id = "termcount">1</div>&nbsp&nbsp<input type = "button" value = " - " id = "removeterm">  
+        <br>Number of Terms: &nbsp&nbsp
+        <div class = "row">
+          <input type = "button" value = " + " id = "addterm">&nbsp&nbsp
+          <div id = "termcount">1</div>&nbsp&nbsp
+          <input type = "button" value = " - " id = "removeterm">
+        </div>
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
@@ -116,8 +121,12 @@
       <div id = "termlist"><br>
 
           <div class = "term" id = 1>
-            <br>Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp&nbsp&nbsp&nbsp Number of attempts:&nbsp&nbsp<input type= "number" id= "setname" name= "setname" required><br>
-            <br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" required>
+            <div class = "num">Term 1:</div><br>
+            <div class = "row">
+              <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-1" name= "termname-1" required>&nbsp&nbsp&nbsp&nbsp</div>
+              <div class = "row">Number of attempts:&nbsp&nbsp<input type= "number" id= "attempts-1" name= "attempts-1" required><br></div>
+            </div>
+            <div class = "row"><br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "def-1" name= "def-1" required></div>
           </div>
 
       </div>
