@@ -108,8 +108,7 @@
             <option value= "3">Complex Maths</option>
           </select><br><br>
         
-        <br>Terms:          
-        Number of Terms: &nbsp&nbsp<input type = "button" value = " + " id = "addterm">&nbsp&nbsp<div id = "termcount">0</div>&nbsp&nbsp<input type = "button" value = " - " id = "removeterm">  
+        <br>Number of Terms: &nbsp&nbsp<input type = "button" value = " + " id = "addterm">&nbsp&nbsp<div id = "termcount">1</div>&nbsp&nbsp<input type = "button" value = " - " id = "removeterm">  
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
