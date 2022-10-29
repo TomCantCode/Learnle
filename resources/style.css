@@ -311,8 +311,8 @@ a:active {
 :root{
     --defaultbg: #000000;
     --defaultbd: #ffffff;
-    --fullbg: #121111;
-    --fullbd: #ffffff;
+    --fullbg: #1a1818;
+    --fullbd: #b1a9a9;
     --correctbg: #238649;
     --correctbd: #265534;
     --incorrectbg: #9e9034;
@@ -320,7 +320,7 @@ a:active {
     --wrongbg: #c32828;
     --wrongbd: #a01c1c;
 
-    --box-size: 60px;
+    --box-size: 20px;
     --centre-pos: 30%;
 }
 
@@ -341,6 +341,7 @@ a:active {
     color: var(--textcol);
     font-size: 40px;
     margin: 2px;
+    padding: 20px;
     width: var(--box-size);
     height: var(--box-size);
   }
