@@ -17,7 +17,7 @@ function create_grid(name, x, y) {
   for (var a = 0; a < total; a++) {
     var square = document.createElement('div');
     square.setAttribute('id', a)
-    square.className += 'square';
+    square.className = 'square';
     grid.appendChild(square);
   }
 
@@ -54,15 +54,15 @@ function grid_add_string(name, string, row) {
 
 
     if (newValue == ANSWER.charAt(a)) {
-      gridNum.className += 'correct';
+      gridNum.className += ' correct';
     }
 
     else if (ANSWER.includes(newValue)) {
-      gridNum.className += 'incorrect';
+      gridNum.className += ' incorrect';
     }
 
     else {
-      gridNum.className += 'wrong';
+      gridNum.className += ' wrong';
     }
 
   };
@@ -90,12 +90,12 @@ window.addEventListener('keydown', function(event) {
   if ((event.key == 'Backspace') && squareNum > GUESSNUM * ANSWER.length) {
     squareNum -= 1;
     document.getElementById(squareNum).innerHTML = '';
-    document.getElementById(squareNum).className += 'square';
+    document.getElementById(squareNum).className = 'square';
   }
 
   if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
     document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
-    document.getElementById(squareNum).className += 'full';
+    document.getElementById(squareNum).className += ' full';
     squareNum += 1;
   }
 

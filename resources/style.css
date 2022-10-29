@@ -314,13 +314,13 @@ a:active {
     --fullbg: #121111;
     --fullbd: #ffffff;
     --correctbg: #238649;
-    --correctbd: #46b969;
+    --correctbd: #265534;
     --incorrectbg: #9e9034;
-    --incorrectbd: #a09446;
+    --incorrectbd: #776b1f;
     --wrongbg: #c32828;
     --wrongbd: #a01c1c;
 
-    --box-width: 50px;
+    --box-size: 60px;
     --centre-pos: 30%;
 }
 
@@ -336,31 +336,32 @@ a:active {
   
   .square {
     background: var(--defaultbg);
-    border: solid 1px var(--defaultbd);
+    border: solid 1px;
+    border-color: var(--defaultbd);
     color: var(--textcol);
     font-size: 40px;
     margin: 2px;
-    width: var(--box-width);
-    height: 50px;
+    width: var(--box-size);
+    height: var(--box-size);
   }
 
   .full {
     background: var(--fullbg);
-    border: var(--fullbd);
+    border-color: var(--fullbd);
   }
   
   .correct {
     background: var(--correctbg);
-    border: var(--correctbd);
-  }
-  
-  .wrong {
-    background: var(--incorrectbg);
-    border: var(--incorrectbd);
+    border-color: var(--correctbd);
   }
   
   .incorrect {
+    background: var(--incorrectbg);
+    border-color: var(--incorrectbd);
+  }
+  
+  .wrong {
     background: var(--wrongbg);
-    border: var(--wrongbd);
+    border-color: var(--wrongbd);
   }
 
