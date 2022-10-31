@@ -259,7 +259,7 @@ pre{
 
 .term{
     margin: 5px 10px 5px 0px;
-    height: 100px;
+    max-height: fit-content;
     max-width: 620px;
     min-width: 200px;
     padding: 10px;

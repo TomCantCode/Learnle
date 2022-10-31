@@ -7,52 +7,46 @@
 
   session_start();
 
+  //Checks if user is signed in, else sent to login page
+  if(!isset($_SESSION["username"])) {
+    header('Location: login.php');
+  }
+
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
-    $USERNAME = $_POST["name"];
-    $EMAIL = $_POST["email"];
-    $DOB = $_POST["dob"];
-    $ACCTYPE = $_POST["acctype"];
-    $PASSWORD = $_POST["password"];
-    $CPASSWORD = $_POST["cpassword"];
+    $SETNAME = $_POST["setname"];
+    $TAG1 = strtolower($_POST["tag1"]);
+    $TAG2 = strtolower($_POST["tag2"]);
+    $TAG3 = strtolower($_POST["tag3"]);
+    $TAGS = array($TAG1,$TAG2,$TAG3);
+    $KEYBOARDTYPE = $_POST["keyboard"];
 
   //All error checking
     $errors = false;
 
-    if($PASSWORD != $CPASSWORD) {
-      $output = "Passwords do not match";
-      $errors = true;
-    }
-
-    $TODAY = date("Y-m-d");
-
-    if($DOB >= $TODAY) {
-      $output = "Date of Birth is invalid";
-      $errors = true;
-    }
-
-    //Fetches any duplicate email addresses
-    $QUERYREAD = "SELECT * FROM acctbl WHERE Email = '$EMAIL'";
+    //Fetches any duplicate set name
+    $QUERYREAD = "SELECT * FROM settbl WHERE SetName = '$SETNAME'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
 
     if(mysqli_num_rows($SQLREAD) > 0) {
-      $output = "Email is already in use";
+      $output = "Set name is already in use";
       $errors = true;
     }
 
-    //If no errors have occured the variables are set to the database
+    //Checks each term for errors
+
+    //If no errors have occured the set variables are set to the database
     if($errors == false) {
-      $PASSWORD = $PASSWORD;//Hashing here
-      $QUERYADD = "INSERT INTO acctbl (AccName, Email, DOB, AccType, Password) VALUES ('$USERNAME', '$EMAIL', '$DOB', '$ACCTYPE', '$PASSWORD')";
+      $QUERYADD = "INSERT INTO settbl (SetName, KeyboardType, Tags) VALUES ('$SETNAME', '$KEYBOARDTYPE', '$TAGS')";
 
       if(mysqli_query($CONNECT, $QUERYADD)) {
-        $output = "Account added!";
+        $output = "Set added!";
       }
     }
 
-    $_SESSION["username"] = $USERNAME;
-    $_SESSION["loggedin"] = TRUE;
+    //If no errors have occured the term variables are set to the database
 
+    
   }
   
 ?>
@@ -102,11 +96,11 @@
 
         <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br><br>
-        Keyboard Type:&nbsp&nbsp<select id= "keyboard" name= "keyboard" required><br>
+        Keyboard Type:&nbsp&nbsp
+        <select id= "keyboard" name= "keyboard" required><br>
             <option value= "1">Alphabet</option>
-            <option value= "2">Simple Maths</option>
-            <option value= "3">Complex Maths</option>
-          </select><br><br>
+            <option value= "2">Maths included</option>
+        </select><br><br>
         
         <br>Number of Terms: &nbsp&nbsp
         <div class = "row">
