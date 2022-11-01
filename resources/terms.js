@@ -1,5 +1,5 @@
 var TERMNUM = 1;
-
+document.cookie=`term_count_uid=`+TERMNUM;   
 
 function addTerm() {
     TERMNUM += 1;
@@ -17,7 +17,8 @@ function addTerm() {
     
     term.innerHTML = CONTENTS;
     document.getElementById('termcount').innerHTML = TERMNUM;
-    
+    document.cookie=`term_count_uid=`+TERMNUM;    
+
     document.getElementById("termlist").appendChild(term);
 
 }
@@ -27,6 +28,7 @@ function removeTerm() {
         document.getElementById(TERMNUM).remove();
         TERMNUM -= 1;
         document.getElementById('termcount').innerHTML = TERMNUM;
+        document.cookie=`term_count_uid=`+TERMNUM;   
     }
     else {
         alert('You must have at least one term in your set!')

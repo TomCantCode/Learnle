@@ -12,7 +12,7 @@
     header('Location: login.php');
   }
 
-  //Gets values for variables from form upon completion
+  //Gets values for set variables from form upon completion
   if(isset($_POST["confirm"])) {
     $SETNAME = $_POST["setname"];
     $TAG1 = strtolower($_POST["tag1"]);
@@ -20,6 +20,19 @@
     $TAG3 = strtolower($_POST["tag3"]);
     $TAGS = array($TAG1,$TAG2,$TAG3);
     $KEYBOARDTYPE = $_POST["keyboard"];
+
+  //Gets values for term variables from form upon completion
+  $TERMNUM = $_COOKIE['term_count_uid'];
+
+  for ($x = 0; $x <= $TERMNUM; $x++) {
+    $termname = "termname-".$TERMNUM;
+    $attempts = "attempts-".$TERMNUM;
+    $def = "def-".$TERMNUM;
+
+    ${"TERMNAME-".$TERMNUM} = strtolower($_POST[$termname]);
+    ${"ATTEMPTS-".$TERMNUM} =$_POST[$attempts];
+    ${"DEF-".$TERMNUM} = $_POST[$def];
+  }
 
   //All error checking
     $errors = false;
@@ -34,6 +47,7 @@
     }
 
     //Checks each term for errors
+    
 
     //If no errors have occured the set variables are set to the database
     if($errors == false) {
