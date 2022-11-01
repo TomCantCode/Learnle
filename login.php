@@ -96,7 +96,7 @@
     </h2>
 
     <pre>
-      <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+      <form method= "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>
 
         Name:               <input type= "text" id= "name" name= "name" required><br>
         Email:              <input type= "text" id= "email" name= "email" required><br>

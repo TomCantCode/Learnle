@@ -106,7 +106,7 @@
     </h2>
 
     
-      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>
 
         <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br><br>
