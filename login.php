@@ -13,7 +13,7 @@
     $EMAIL = $_POST["email"];
     $PASSWORD = $_POST["password"];
 
-  //All error checking
+    //All error checking
     $errors = false;
 
     //Fetches the Username, email and password from the database

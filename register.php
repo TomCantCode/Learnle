@@ -16,7 +16,7 @@
     $PASSWORD = $_POST["password"];
     $CPASSWORD = $_POST["cpassword"];
 
-  //All error checking
+    //All error checking
     $errors = false;
 
     if($PASSWORD != $CPASSWORD) {

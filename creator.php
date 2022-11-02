@@ -21,20 +21,20 @@
     $TAGS = array($TAG1,$TAG2,$TAG3);
     $KEYBOARDTYPE = $_POST["keyboard"];
 
-  //Gets values for term variables from form upon completion
-  $TERMNUM = $_COOKIE['term_count_uid'];
+    //Gets values for term variables from form upon completion
+    $TERMNUM = $_COOKIE['term_count_uid'];
 
-  for ($x = 0; $x <= $TERMNUM; $x++) {
-    $termname = "termname-".$x;
-    $attempts = "attempts-".$x;
-    $def = "def-".$x;
+    for ($x = 0; $x <= $TERMNUM; $x++) {
+      $termname = "termname-".$x;
+      $attempts = "attempts-".$x;
+      $def = "def-".$x;
 
-    ${"TERMNAME-".$x} = strtolower($_POST[$termname]);
-    ${"ATTEMPTS-".$x} =$_POST[$attempts];
-    ${"DEF-".$x} = $_POST[$def];
-  }
+      ${"TERMNAME-".$x} = strtolower($_POST[$termname]);
+      ${"ATTEMPTS-".$x} =$_POST[$attempts];
+      ${"DEF-".$x} = $_POST[$def];
+    }
 
-  //All error checking
+    //All error checking
     $errors = false;
 
     //Fetches any duplicate set name
@@ -46,8 +46,49 @@
       $errors = true;
     }
 
+    //Checks set title is only alphanumeric
+    if(preg_match("#^[a-zA-Z0-9]+$#", $CURRENTTERM)) {
+      $output = "Set name doesn't contain just alphanumeric characters";
+      $errors = true;
+    }
+
     //Checks each term for errors
+    for ($x = 0; $x <= $TERMNUM; $x++) {
+
+      $CURRENTTERM = ${"TERMNAME-".$x};
+      $CURRENTATT = ${"ATTEMPTS-".$x};
+      $CURRENTDEF = ${"DEF-".$x};
+
+      //If term is too long
+      if(strlen(${"TERMNAME-".$x}) < 10) {
+        $output = "Term is too long (Term: ". $x .")";
+        $errors = true;
+      }
+
+      //If term has character that won't be typable with keyboard type
+      if($KEYBOARDTYPE == 1) {
+        $alphabet = "#^[a-zA-Z]+$#";
+      }
+      else {
+        $alphabet = "#^[a-zA-Z0-9+-/*=]+$#";
+      }
+
+      if(preg_match($alphabet, $CURRENTTERM)) {
+        $output = "Term doesn't contain legal characters from chosen keyboard mode (Term: ". $x .")";
+        $errors = true;
+      }
+
+      //If number of attempts is less than the length of the word AND sensible (i.e unfair)
+      if($CURRENTATT < strlen($CURRENTTERM)) {
+        $output = "Number of attempts is less than the length of the Term (Term: ". $x .")";
+        $errors = true;
+      }
     
+      if($CURRENTATT < 15) {
+          $output = "Number of attempts is too large (Term: ". $x .")";
+          $errors = true;
+      }
+    }
 
     //If no errors have occured the set variables are set to the database
     if($errors == false) {
