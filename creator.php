@@ -24,10 +24,10 @@
     //Gets values for term variables from form upon completion
     $TERMNUM = $_COOKIE['term_count_uid'];
 
-    for ($x = 0; $x <= $TERMNUM; $x++) {
       ${"TERMNAME-".$x} = strtolower($_POST["termname-".$x]);
       ${"ATTEMPTS-".$x} = $_POST["attempts-".$x];
       ${"DEF-".$x} = $_POST["def-".$x];
+    for ($x = 1; $x <= $TERMNUM; $x++) {
     }
 
     //All error checking
@@ -49,14 +49,14 @@
     }
 
     //Checks each term for errors
-    for ($x = 0; $x <= $TERMNUM; $x++) {
+    for ($x = 1; $x <= $TERMNUM; $x++) {
 
       $CURRENTTERM = ${"TERMNAME-".$x};
       $CURRENTATT = ${"ATTEMPTS-".$x};
       $CURRENTDEF = ${"DEF-".$x};
 
       //If term is too long
-      if(strlen(${"TERMNAME-".$x}) < 10) {
+      if(strlen($TERMNAME[$x]) < 10) {
         $output = "Term is too long (Term: ". $x .")";
         $errors = true;
       }
@@ -97,7 +97,7 @@
 
     //If no errors have occured the term variables are set to the database
     if($errors == false) {
-      for ($x = 0; $x <= $TERMNUM; $x++) {
+      for ($x = 1; $x <= $TERMNUM; $x++) {
         $SETID = "SELECT SetID FROM settbl WHERE SetName = '$SETNAME'";
 
         $CURRENTTERM = ${"TERMNAME-".$x};
