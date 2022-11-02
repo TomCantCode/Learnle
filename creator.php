@@ -24,10 +24,10 @@
     //Gets values for term variables from form upon completion
     $TERMNUM = $_COOKIE['term_count_uid'];
 
+    for ($x = 1; $x <= $TERMNUM; $x++) {
       ${"TERMNAME-".$x} = strtolower($_POST["termname-".$x]);
       ${"ATTEMPTS-".$x} = $_POST["attempts-".$x];
       ${"DEF-".$x} = $_POST["def-".$x];
-    for ($x = 1; $x <= $TERMNUM; $x++) {
     }
 
     //All error checking
@@ -56,7 +56,7 @@
       $CURRENTDEF = ${"DEF-".$x};
 
       //If term is too long
-      if(strlen($TERMNAME[$x]) < 10) {
+      if(strlen(${"TERMNAME-".$x}) < 10) {
         $output = "Term is too long (Term: ". $x .")";
         $errors = true;
       }
