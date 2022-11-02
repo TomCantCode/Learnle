@@ -25,13 +25,13 @@
   $TERMNUM = $_COOKIE['term_count_uid'];
 
   for ($x = 0; $x <= $TERMNUM; $x++) {
-    $termname = "termname-".$TERMNUM;
-    $attempts = "attempts-".$TERMNUM;
-    $def = "def-".$TERMNUM;
+    $termname = "termname-".$x;
+    $attempts = "attempts-".$x;
+    $def = "def-".$x;
 
-    ${"TERMNAME-".$TERMNUM} = strtolower($_POST[$termname]);
-    ${"ATTEMPTS-".$TERMNUM} =$_POST[$attempts];
-    ${"DEF-".$TERMNUM} = $_POST[$def];
+    ${"TERMNAME-".$x} = strtolower($_POST[$termname]);
+    ${"ATTEMPTS-".$x} =$_POST[$attempts];
+    ${"DEF-".$x} = $_POST[$def];
   }
 
   //All error checking
@@ -59,7 +59,20 @@
     }
 
     //If no errors have occured the term variables are set to the database
+    if($errors == false) {
+      for ($x = 0; $x <= $TERMNUM; $x++) {
+        $SETID = "SELECT SetID FROM settbl WHERE SetName = '$SETNAME'";
 
+        $CURRENTTERM = ${"TERMNAME-".$x};
+        $CURRENTATT = ${"ATTEMPTS-".$x};
+        $CURRENTDEF = ${"DEF-".$x};
+        $QUERYADD = "INSERT INTO termtbl (Term, SetID, Def, NumAtt) VALUES ('$CURRENTTERM', '$SETID', '$CURRENTDEF', '$CURRENTATT')";
+
+        if(mysqli_query($CONNECT, $QUERYADD)) {
+          $output = "Term". $x ."added!";
+        }
+      }
+    }
     
   }
   
