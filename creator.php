@@ -25,9 +25,9 @@
     $TERMNUM = $_COOKIE['term_count_uid'];
 
     for ($x = 1; $x <= $TERMNUM; $x++) {
-      ${"TERMNAME-".$x} = strtolower($_POST["termname-".$x]);
-      ${"ATTEMPTS-".$x} = $_POST["attempts-".$x];
-      ${"DEF-".$x} = $_POST["def-".$x];
+      ${"TERMNAME-".$x} = strtolower($_POST["termname-$x"]);
+      ${"ATTEMPTS-".$x} = $_POST["attempts-$x"];
+      ${"DEF-".$x} = $_POST["def-$x"];
     }
 
     //All error checking
@@ -56,7 +56,7 @@
       $CURRENTDEF = ${"DEF-".$x};
 
       //If term is too long
-      if(strlen(${"TERMNAME-".$x}) < 10) {
+      if(strlen($CURRENTTERM) < 10) {
         $output = "Term is too long (Term: ". $x .")";
         $errors = true;
       }
@@ -98,11 +98,12 @@
     //If no errors have occured the term variables are set to the database
     if($errors == false) {
       for ($x = 1; $x <= $TERMNUM; $x++) {
-        $SETID = "SELECT SetID FROM settbl WHERE SetName = '$SETNAME'";
+        $QUERYREAD = "SELECT SetID FROM settbl WHERE SetName = '$SETNAME'";
+        $SETID = mysqli_fetch_assoc($SQLREAD);
 
-        $CURRENTTERM = ${"TERMNAME-".$x};
-        $CURRENTATT = ${"ATTEMPTS-".$x};
-        $CURRENTDEF = ${"DEF-".$x};
+        $CURRENTTERM = ${"TERMNAME-$x"};
+        $CURRENTATT = ${"ATTEMPTS-$x"};
+        $CURRENTDEF = ${"DEF-$x"};
         $QUERYADD = "INSERT INTO termtbl (Term, SetID, Def, NumAtt) VALUES ('$CURRENTTERM', '$SETID', '$CURRENTDEF', '$CURRENTATT')";
 
         if(mysqli_query($CONNECT, $QUERYADD)) {
