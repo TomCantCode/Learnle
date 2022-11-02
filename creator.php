@@ -43,7 +43,7 @@
     }
 
     //Checks set title is only alphanumeric
-    if(preg_match("#^[a-zA-Z0-9]+$#", $SETNAME)) {
+    if(!preg_match("#^[a-zA-Z0-9 ]+$#", $SETNAME)) {
       $output = "Set name doesn't contain just alphanumeric characters";
       $errors = true;
     }
@@ -56,8 +56,8 @@
       $CURRENTDEF = ${"DEF-".$x};
 
       //If term is too long
-      if(strlen($CURRENTTERM) < 10) {
-        $output = "Term is too long (Term: ". $x .")";
+      if(!(strlen($CURRENTTERM) < 10)) {
+        $output = "Term is too long (Term: $x)$CURRENTTERM";
         $errors = true;
       }
 
@@ -69,22 +69,23 @@
         $alphabet = "#^[a-zA-Z0-9+-/*=]+$#";
       }
 
-      if(preg_match($alphabet, $CURRENTTERM)) {
-        $output = "Term doesn't contain legal characters from chosen keyboard mode (Term: ". $x .")";
+      if(!preg_match($alphabet, $CURRENTTERM)) {
+        $output = "Term doesn't contain legal characters from chosen keyboard mode (Term: $x)";
         $errors = true;
       }
 
       //If number of attempts is less than the length of the word AND sensible (i.e unfair)
       if($CURRENTATT < strlen($CURRENTTERM)) {
-        $output = "Number of attempts is less than the length of the Term (Term: ". $x .")";
+        $output = "Number of attempts is less than the length of the Term (Term: $x)";
         $errors = true;
       }
     
-      if($CURRENTATT < 15) {
-          $output = "Number of attempts is too large (Term: ". $x .")";
+      if(!($CURRENTATT < 15)) {
+          $output = "Number of attempts is too large (Term: $x)";
           $errors = true;
       }
     }
+ 
 
     //If no errors have occured the set variables are set to the database
     if($errors == false) {
@@ -104,7 +105,7 @@
         $CURRENTTERM = ${"TERMNAME-$x"};
         $CURRENTATT = ${"ATTEMPTS-$x"};
         $CURRENTDEF = ${"DEF-$x"};
-        $QUERYADD = "INSERT INTO termtbl (Term, SetID, Def, NumAtt) VALUES ('$CURRENTTERM', '$SETID', '$CURRENTDEF', '$CURRENTATT')";
+        $QUERYADD = "INSERT INTO termtbl (Term, Def, NumAtt) VALUES ('$CURRENTTERM', '$CURRENTDEF', '$CURRENTATT')";
 
         if(mysqli_query($CONNECT, $QUERYADD)) {
           $output = "Term". $x ."added!";
@@ -139,9 +140,8 @@
 
     <div class = "menuright">
         <p>
-          <?php if(isset($_SESSION["username"])) {
+          <?php
             echo 'Save to '. $_SESSION["username"] ."'s Personal library";
-          }
           ?>
         </p>
     </div>
@@ -175,7 +175,7 @@
         </div>
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
-      </form>
+      
 
       <div id = "termlist"><br>
 
@@ -189,7 +189,8 @@
           </div>
 
       </div>
-      
+      </form>
+
       <script src = "resources/terms.js"></script>
 
     
