@@ -25,13 +25,9 @@
     $TERMNUM = $_COOKIE['term_count_uid'];
 
     for ($x = 0; $x <= $TERMNUM; $x++) {
-      $termname = "termname-".$x;
-      $attempts = "attempts-".$x;
-      $def = "def-".$x;
-
-      ${"TERMNAME-".$x} = strtolower($_POST[$termname]);
-      ${"ATTEMPTS-".$x} =$_POST[$attempts];
-      ${"DEF-".$x} = $_POST[$def];
+      ${"TERMNAME-".$x} = strtolower($_POST["termname-".$x]);
+      ${"ATTEMPTS-".$x} = $_POST["attempts-".$x];
+      ${"DEF-".$x} = $_POST["def-".$x];
     }
 
     //All error checking
@@ -47,7 +43,7 @@
     }
 
     //Checks set title is only alphanumeric
-    if(preg_match("#^[a-zA-Z0-9]+$#", $CURRENTTERM)) {
+    if(preg_match("#^[a-zA-Z0-9]+$#", $SETNAME)) {
       $output = "Set name doesn't contain just alphanumeric characters";
       $errors = true;
     }
@@ -160,7 +156,7 @@
     </h2>
 
     
-      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>"
+      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
 
         <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br><br>
