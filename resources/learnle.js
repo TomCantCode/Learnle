@@ -50,7 +50,7 @@ function grid_add_string(name, string, row) {
   for (var a = 0; a < string.length; a++) {
     var newValue = (string.charAt(a)).toUpperCase()
     gridNum = document.getElementById(a + (string.length * (row)))
-    gridNum.innerHTML = `<p>` + newValue + `</p>`;
+    gridNum.innerHTML = newValue;
 
 
     if (newValue == ANSWER.charAt(a)) {
@@ -94,7 +94,7 @@ window.addEventListener('keydown', function(event) {
   }
 
   if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
-    document.getElementById(squareNum).innerHTML = `<p>` + `${event.key}`.toUpperCase() + `</p>`;
+    document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
     document.getElementById(squareNum).className += ' full';
     squareNum += 1;
   }
@@ -104,8 +104,6 @@ window.addEventListener('keydown', function(event) {
     var trialGuess = '';
     for (var i = 0; i < ANSWER.length; i++) {
         var currentletter = (document.getElementById(i + (ANSWER.length * (GUESSNUM))).innerHTML);
-        currentletter = currentletter.replace('<p>', '');
-        currentletter = currentletter.replace('</p>', '');
         trialGuess += currentletter
       }
 
