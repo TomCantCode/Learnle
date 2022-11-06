@@ -15,6 +15,12 @@
   <link rel="icon" href="images/logo.png" type="image">
 </head>
 
+<style>
+  body {
+    overflow-x: hidden;
+  }
+</style>
+
 <div class = "menu">
 
     <div class = "menuleft">

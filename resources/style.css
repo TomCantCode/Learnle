@@ -5,21 +5,20 @@
   --accent1: #2C4031;
   --accent2: #2B5937;
   --accent3: #2c403b;
+
+  --titlecol: #CCBBBBBE;
   --textcol: #BEBEBE;
-  --titlecol: #595959;
+  --textcolb: #68636ED3;
 }
 
 .menu{
     position: sticky;
     height: 80px;
-    margin: auto;
-    width: 90%;
+    width: 95%;
     min-width: 350px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 25px auto;
     padding: 10px;
 
-    /*background: var(--accent1);*/
     background: var(--accent3);
     background: linear-gradient(180deg, var(--accent1) 33%, var(--accent3) 80%);
     border-radius: 15px;
@@ -65,7 +64,7 @@
     position: absolute;
     width: 40%;
     left: 50%;
-    transform: translate(-45%);
+    transform: translate(-40%);
 }
 
 @media screen and (max-width: 690px) {
@@ -77,8 +76,11 @@
 .menu .menumiddle .searchbar {  
   font-family: 'Outfit', sans-serif;
   min-width: 50px;
-  height: 36px;
+  height: 40px;
   width: 100%;
+  font-size: 18px;
+  
+  background-color: #00000060;
 }
 
 .menu .menuright{
@@ -103,7 +105,6 @@
     margin-bottom: 30px;
     padding: 5px;
 
-    /*background: var(--accent1);*/
     background: var(--accent3);
     background: linear-gradient(180deg, var(--accent1) 33%, var(--accent3) 80%);
     border-radius: 10px;
@@ -275,11 +276,12 @@ pre{
 }
 
 footer{
+  margin: -10px 0px -10px -10px;
   background: var(--accent1);
-  padding-bottom: 300px;
+  width: 100vw;
   padding: 10px;
-  margin: 0px;
   font-size: 15px;
+
 }
 
 a:link {
@@ -290,19 +292,20 @@ a:link {
 
 a:visited {
     font-size: 15px;
-    color: var(--textcolb);
-    text-decoration: bold;
+    color: var(--textcol);
+    text-decoration: none;
 }
 
 a:hover {
     font-size: 20px;
     text-decoration: underline;
+    transition: ease-in-out 0.2s;
 }
 
 a:active {
     font-size: 15px;
     color: var(--textcol);
-    text-decoration: none;
+    font-weight: bold;
 }
 
 
