@@ -1,3 +1,19 @@
+<?php
+
+  //Includes connection to the database
+  include "resources/database-connection.php";
+
+  $CONNECT;
+
+  session_start();
+
+  //Checks if user is signed in, else sent to login page
+  if(!isset($_SESSION["username"])) {
+    header('Location: login.php');
+  }
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,6 +24,7 @@
   <link href="resources/style.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="images/logo.png" type="image">
 </head>
+
 <style>
   body {
     overflow-x: hidden;
@@ -25,12 +42,11 @@
     </div>
   
     <div class = "menuright">
-        <div>
-          <?php if(isset($_SESSION["username"])) {
-            echo 'Playing as '. $_SESSION["username"];
-          }
-          ?>
-        </div>
+      <p>
+        <?php 
+           echo 'Playing as '. $_SESSION["username"];
+        ?>
+      </p>
     </div>
 
 </div>

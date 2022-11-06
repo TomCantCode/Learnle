@@ -139,7 +139,7 @@
     padding: 10px;
     position: absolute;
     top: 50%;
-    transform: translate(45%,-50%);
+    transform: translate(45%,-45%);
 }
 
 .menusmall .menuright{
@@ -159,8 +159,8 @@
     width: 250px;
     position: absolute;
     top: 50%;
-    transform: translate(-100%,-50%);
-    text-align: left;
+    transform: translate(-100%,-100%);
+    text-align: right;
     font-size: 15px;  
 }
 
@@ -311,17 +311,20 @@ a:active {
 :root{
     --defaultbg: #000000;
     --defaultbd: #ffffff;
+
     --fullbg: #1a1818;
     --fullbd: #b1a9a9;
+
     --correctbg: #238649;
     --correctbd: #265534;
+
     --incorrectbg: #9e9034;
     --incorrectbd: #776b1f;
+
     --wrongbg: #c32828;
     --wrongbd: #a01c1c;
 
-    --box-size: 20px;
-    --centre-pos: 30%;
+    --box-size: 60px;
 }
 
 #grid-container {
@@ -330,39 +333,45 @@ a:active {
     margin-top: 150px;
     justify-content: center;
     position: relative;
-    width: 33%;
     margin-bottom: 50px;
-  }
+}
   
-  .square {
+.square {
     background: var(--defaultbg);
     border: solid 1px;
     border-color: var(--defaultbd);
     color: var(--textcol);
+    text-align: center;
+    vertical-align: middle;
     font-size: 40px;
     margin: 2px;
-    padding: 20px;
+    padding: 0px;
     width: var(--box-size);
     height: var(--box-size);
-  }
+}
 
-  .full {
+.square p {
+    margin: 20px 23px 20px 17px;
+
+}
+
+.full {
     background: var(--fullbg);
     border-color: var(--fullbd);
-  }
+}
   
-  .correct {
+.correct {
     background: var(--correctbg);
     border-color: var(--correctbd);
-  }
+}
   
-  .incorrect {
+.incorrect {
     background: var(--incorrectbg);
     border-color: var(--incorrectbd);
-  }
+}
   
-  .wrong {
+.wrong {
     background: var(--wrongbg);
     border-color: var(--wrongbd);
-  }
+}
 
