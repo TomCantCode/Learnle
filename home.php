@@ -37,13 +37,31 @@
   
     <div class = "menuright">
         <div>
-          <?php if(isset($_SESSION["username"])) {
-            echo '<pre> Welcome '. $_SESSION["username"] . '</pre>
-            <a href="resources/logout.php" target="_self">Logout</a><br>';
+
+          <?php 
+          //Sets right menu depending whether user is signed in
+          if(isset($_SESSION["username"])) {
+            if(($_SESSION["type"]) == 't') {
+              $image = 'teacher';
+            }
+            else {
+              //Sets displayed profile image, either a teacher or student, depending on users account type
+              $image = 'student';
+            }
+
+            echo 
+            '<div class = "dropdown">
+              <button class = "dropbutton"><img class = "icon" src = "images/' . $image . '.png" height = "64px" width = "64px"></button>
+                <div class = "droplist">
+                  <pre>' . $_SESSION["username"] . '</pre>
+                  <a href="resources/personal-library.php" target="_self">Personal Library</a><br>
+                  <a href="resources/logout.php" target="_self">Logout</a><br>
+                </div>
+            </div>';
           }
           else {
             echo '<a href="login.php" target="_self">Login</a><br>
-          <a href="register.php" target="_self">Register</a><br>';
+                  <a href="register.php" target="_self">Register</a><br>';
           }
           
           ?>
