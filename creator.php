@@ -6,11 +6,13 @@
   $CONNECT;
 
   session_start();
+  unset($output);
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
     header('Location: login.php');
   }
+
 
   //Gets values for set variables from form upon completion
   if(isset($_POST["confirm"])) {
@@ -19,6 +21,7 @@
     $TAG2 = strtolower($_POST["tag2"]);
     $TAG3 = strtolower($_POST["tag3"]);
     $TAGS = array($TAG1,$TAG2,$TAG3);
+    $TAGS = implode(",",$TAGS);
     $KEYBOARDTYPE = $_POST["keyboard"];
 
     //Gets values for term variables from form upon completion
@@ -57,7 +60,7 @@
 
       //If term is too long
       if(!(strlen($CURRENTTERM) < 10)) {
-        $output = "Term is too long (Term: $x)$CURRENTTERM";
+        $output = "Term is too long (Term: $x) $CURRENTTERM";
         $errors = true;
       }
 
@@ -89,7 +92,8 @@
 
     //If no errors have occured the set variables are set to the database
     if($errors == false) {
-      $QUERYADD = "INSERT INTO settbl (SetName, KeyboardType, Tags) VALUES ('$SETNAME', '$KEYBOARDTYPE', '$TAGS')";
+      $ACCID = $_SESSION["ID"];
+      $QUERYADD = "INSERT INTO settbl (SetName, AccID, KeyboardType, Tags) VALUES ('$SETNAME', '$ACCID', '$KEYBOARDTYPE', '$TAGS')";
 
       if(mysqli_query($CONNECT, $QUERYADD)) {
         $output = "Set added!";
@@ -100,17 +104,25 @@
     if($errors == false) {
       for ($x = 1; $x <= $TERMNUM; $x++) {
         $QUERYREAD = "SELECT SetID FROM settbl WHERE SetName = '$SETNAME'";
-        $SETID = mysqli_fetch_assoc($SQLREAD);
+        $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+        $ROW = mysqli_fetch_assoc($SQLREAD);
+        $SETID = $ROW["SetID"];
 
         $CURRENTTERM = ${"TERMNAME-$x"};
         $CURRENTATT = ${"ATTEMPTS-$x"};
         $CURRENTDEF = ${"DEF-$x"};
-        $QUERYADD = "INSERT INTO termtbl (Term, Def, NumAtt) VALUES ('$CURRENTTERM', '$CURRENTDEF', '$CURRENTATT')";
+        $QUERYADD = "INSERT INTO termtbl (Term, SetID, Def, NumAtt) VALUES ('$CURRENTTERM', '$SETID', '$CURRENTDEF', '$CURRENTATT')";
 
         if(mysqli_query($CONNECT, $QUERYADD)) {
-          $output = "Term". $x ."added!";
+          $output = "Term ". $x ." added!";
         }
       }
+
+     echo '<script type="text/JavaScript"> 
+     alert("Set added!");
+     window.location.href = "home.php"
+     </script>';
+
     }
     
   }
@@ -155,12 +167,11 @@
     <h2>
       Create a Set:
     </h2>
-
     
       <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>" autocomplete="off">
 
         <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
-        Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" required> <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" required><br><br>
+        Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" > <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" ><br><br>
         Keyboard Type:&nbsp&nbsp
         <select id= "keyboard" name= "keyboard" required><br>
             <option value= "1">Alphabet</option>
@@ -182,10 +193,10 @@
           <div class = "term" id = 1>
             <div class = "num">Term 1:</div><br>
             <div class = "row">
-              <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-1" name= "termname-1" required>&nbsp&nbsp&nbsp&nbsp</div>
+              <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-1" name= "termname-1" required autocomplete="off">&nbsp&nbsp&nbsp&nbsp</div>
               <div class = "row">Number of attempts:&nbsp&nbsp<input type= "number" id= "attempts-1" name= "attempts-1" required><br></div>
             </div>
-            <div class = "row"><br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "def-1" name= "def-1" required></div>
+            <div class = "row"><br>Definition (Hint):&nbsp&nbsp<input type= "text" id= "def-1" name= "def-1" required autocomplete="off"></div>
           </div>
 
       </div>

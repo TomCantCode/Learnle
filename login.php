@@ -6,6 +6,7 @@
   $CONNECT;
 
   session_start();
+  unset($output);
 
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
@@ -17,7 +18,7 @@
     $errors = false;
 
     //Fetches the Username, email and password from the database
-    $QUERYREAD = "SELECT AccName, Email, AccType, Password FROM acctbl WHERE Email = '$EMAIL'";
+    $QUERYREAD = "SELECT AccID, AccName, Email, AccType, Password FROM acctbl WHERE Email = '$EMAIL'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
     $ROW = mysqli_fetch_assoc($SQLREAD);
 
@@ -42,13 +43,17 @@
 
     //If no errors have occured the variables are set to the session variables, then returns to homepage
     if($errors == false) {
+      $_SESSION["ID"] = $ROW["AccID"];
       $_SESSION["username"] = $USERNAME;
       $_SESSION["type"] = $ROW["AccType"];
       $_SESSION["loggedin"] = TRUE;
       $output = "Signed In!";
 
-      header('Location: home.php');
-      exit;
+      
+     echo '<script type="text/JavaScript"> 
+     alert("Signed In!");
+     window.location.href = "home.php"
+     </script>';
 
     }
 

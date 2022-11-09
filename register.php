@@ -6,6 +6,7 @@
   $CONNECT;
 
   session_start();
+  unset($output);
 
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
@@ -40,7 +41,7 @@
       $errors = true;
     }
 
-    //If no errors have occured the variables are set to the database
+    //If no errors have occured the variables are set to the database and session variables
     if($errors == false) {
       $PASSWORD = $PASSWORD;//Hashing here
       $QUERYADD = "INSERT INTO acctbl (AccName, Email, DOB, AccType, Password) VALUES ('$USERNAME', '$EMAIL', '$DOB', '$ACCTYPE', '$PASSWORD')";
@@ -48,10 +49,22 @@
       if(mysqli_query($CONNECT, $QUERYADD)) {
         $output = "Account added!";
       }
-    }
 
-    $_SESSION["username"] = $USERNAME;
-    $_SESSION["loggedin"] = TRUE;
+      $QUERYREAD = "SELECT AccID, AccType FROM acctbl WHERE Email = '$EMAIL'";
+      $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+      $ROW = mysqli_fetch_assoc($SQLREAD);
+
+      $_SESSION["ID"] = $ROW["AccID"];
+      $_SESSION["username"] = $USERNAME;
+      $_SESSION["type"] = $ROW["AccType"];
+      $_SESSION["loggedin"] = TRUE;
+
+      echo '<script type="text/JavaScript"> 
+      alert("Account added!");
+      window.location.href = "home.php"
+      </script>';
+
+    }
 
   }
   
