@@ -248,17 +248,8 @@ pre{
     text-align: left;
 
     background: url(../images/chalkboard.jpg);
+    border-radius: 5px;
     border: 4px solid var(--accent2)
-}
-
-@media screen and (max-width: 565px) {
-    .largeboard{
-      padding: 10px 20px;
-    }
-}
-
-#termcount{
-    display: inline;
 }
 
 .homeboard{
@@ -286,6 +277,34 @@ pre{
     align-items: stretch;
 }
 
+.halfboard{
+    box-sizing: border-box;
+    margin: 0px 15px 50px;
+    padding: 10px;
+    
+    position: relative;
+    /*height: 800px;*/
+    width: 50%;
+    min-height: 800px;
+    min-width: 250px;
+    text-align: left;
+
+    background: url(../images/chalkboard.jpg);
+    background-position: left bottom;
+    border-radius: 5px;
+    border: 4px solid var(--accent2);
+}
+
+@media screen and (max-width: 565px) {
+    .largeboard{
+      padding: 10px 20px;
+    }
+}
+
+#termcount{
+    display: inline;
+}
+
 #termlist{
     display: flex;
     flex-wrap: wrap;
@@ -304,8 +323,46 @@ pre{
     opacity: 0.75;
 }
 
+.set{
+    margin: 20px 10px 20px 0px;
+    max-height: fit-content;
+    max-width: 620px;
+    min-width: 200px;
+    padding: 10px;
+    position: relative;
+    text-align: left;
+
+    background: var(--fullbg);
+    opacity: 0.75;
+}
+
 .row{
     display: inline-block;
+}
+
+.smallbutton{
+    background-color: var(--accent2);
+    color: inherit;
+    border: 5px var(--accent2);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.roundbutton{
+    background-color: var(--accent2);
+    color: inherit;
+    border: 10px var(--accent2);
+    padding: 10px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 15px;
+    opacity: 1;
+}
+
+#play{
+    right: 10px;
+    top: 32%;
+    position: absolute;
 }
 
 footer{
@@ -317,27 +374,26 @@ footer{
 
 }
 
-a:link {
+.link{
     font-size: 15px;
     color: var(--textcol);
+}
+
+.link:link {
     text-decoration: none;
 }
 
-a:visited {
-    font-size: 15px;
-    color: var(--textcol);
+.link:visited {
     text-decoration: none;
 }
 
-a:hover {
+.link:hover {
     font-size: 20px;
     text-decoration: underline;
     transition: ease-in-out 0.2s;
 }
 
-a:active {
-    font-size: 15px;
-    color: var(--textcol);
+.link:active {
     font-weight: bold;
 }
 

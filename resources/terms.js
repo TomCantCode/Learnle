@@ -8,7 +8,7 @@ function addTerm() {
     term.value = 'not null'
     term.className += 'term';
 
-    var CONTENTS = `<div class = "num">Term `+TERMNUM+`:</div><br>
+    var CONTENTS = `<div>Term `+TERMNUM+`:</div><br>
     <div class = "row">
       <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-`+TERMNUM+`" name= "termname-`+TERMNUM+`" required autocomplete="off">&nbsp&nbsp&nbsp&nbsp</div>
       <div class = "row">Number of attempts:&nbsp&nbsp<input type= "number" id= "attempts-`+TERMNUM+`" name= "attempts-`+TERMNUM+`" required><br></div>

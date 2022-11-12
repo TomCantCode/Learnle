@@ -171,7 +171,7 @@
     
       <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>" autocomplete="off">
 
-        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" value = "Save set" name = "confirm"><br><br>
+        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" class = "smallbutton" value = "Save set" name = "confirm"><br><br>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" > <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" ><br><br>
         Keyboard Type:&nbsp&nbsp
         <select id= "keyboard" name= "keyboard" required><br>
@@ -181,9 +181,9 @@
         
         <br>Number of Terms: &nbsp&nbsp
         <div class = "row">
-          <input type = "button" value = " + " id = "addterm">&nbsp&nbsp
+          <input type = "button" class = "smallbutton" value = " + " id = "addterm">&nbsp&nbsp
           <div id = "termcount">1</div>&nbsp&nbsp
-          <input type = "button" value = " - " id = "removeterm">
+          <input type = "button" class = "smallbutton" value = " - " id = "removeterm">
         </div>
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
@@ -192,7 +192,7 @@
       <div id = "termlist"><br>
 
           <div class = "term" id = 1>
-            <div class = "num">Term 1:</div><br>
+            <div>Term 1:</div><br>
             <div class = "row">
               <div class = "row">Name:&nbsp&nbsp<input type= "text" id= "termname-1" name= "termname-1" required autocomplete="off">&nbsp&nbsp&nbsp&nbsp</div>
               <div class = "row">Number of attempts:&nbsp&nbsp<input type= "number" id= "attempts-1" name= "attempts-1" required><br></div>

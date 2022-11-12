@@ -104,7 +104,7 @@
     <div class = "menuright">
         <div>
           <pre>Already have an Account?</pre>
-          <a href="login.php" target="_self">Log In</a><br>
+          <a href="login.php" class="link" target="_self">Log In</a><br>
         </div>
     </div>
   
@@ -130,7 +130,7 @@
         </select><br>
         Password:           <input type= "password" id= "password" name= "password" required><br>
         Confirm Password:   <input type= "password" id= "cpassword" name= "cpassword" required><br><br>
-        <input type= "submit" value= "Confirm" name= "confirm">   <input type= "reset" required>
+        <input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm">   <input type= "reset" class = "smallbutton" required>
 
         <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>

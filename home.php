@@ -56,14 +56,14 @@
               <button class = "dropbutton"><img class = "icon" src = "images/' . $image . '.png" height = "64px" width = "64px"></button>
                 <div class = "droplist">
                   <pre>' . $_SESSION["username"] . '</pre>
-                  <a href="personal-library.php" target="_self">Personal Library</a><br>
-                  <a href="resources/logout.php" target="_self">Logout</a><br>
+                  <a href="personal-library.php" class="link" target="_self">Personal Library</a><br>
+                  <a href="resources/logout.php" class="link" target="_self">Logout</a><br>
                 </div>
             </div>';
           }
           else {
-            echo '<a href="login.php" target="_self">Login</a><br>
-                  <a href="register.php" target="_self">Register</a><br>';
+            echo '<a href="login.php" class="link" target="_self">Login</a><br>
+                  <a href="register.php" class="link" target="_self">Register</a><br>';
           }
           
           ?>
@@ -87,7 +87,7 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href="game.php" target="_self">Play example game</a>
+     <a href="game.php" class="link" target="_self">Play example game</a>
     </div>
 
     <div class = "homeboard">
@@ -101,7 +101,7 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href="creator.php" target="_self">Set Creator</a>
+     <a href="creator.php" class="link" target="_self">Set Creator</a>
     </div>
 
     <div class = "homeboard">
