@@ -59,10 +59,20 @@
       $_SESSION["type"] = $ROW["AccType"];
       $_SESSION["loggedin"] = TRUE;
 
-      echo '<script type="text/JavaScript"> 
-      alert("Account added!");
-      window.location.href = "home.php"
-      </script>';
+     //Sent to homepage/orignal destination
+     if(!isset($_SESSION["destination"])) {
+      $DESTINATION = "home.php";
+     }
+     else {
+      $DESTINATION = $_SESSION["destination"];
+     }
+
+     echo '<script type="text/JavaScript"> 
+     alert("Signed In!");
+     window.location.href = "' . $DESTINATION . '";
+     </script>';
+     $_SESSION["destination"] = null;
+
 
     }
 
