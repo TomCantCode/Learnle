@@ -10,6 +10,7 @@
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
+    $_SESSION["destination"] = "creator.php";
     header('Location: login.php');
   }
 

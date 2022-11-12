@@ -41,7 +41,7 @@
       $errors = true;
     }
 
-    //If no errors have occured the variables are set to the session variables, then returns to homepage
+    //If no errors have occured the variables are set to the session variables
     if($errors == false) {
       $_SESSION["ID"] = $ROW["AccID"];
       $_SESSION["username"] = $USERNAME;
@@ -49,11 +49,19 @@
       $_SESSION["loggedin"] = TRUE;
       $output = "Signed In!";
 
-      
+     //Sent to homepage/orignal destination
+     if(!isset($_SESSION["destination"])) {
+      $DESTINATION = "home.php";
+     }
+     else {
+      $DESTINATION = $_SESSION["destination"];
+     }
+
      echo '<script type="text/JavaScript"> 
      alert("Signed In!");
-     window.location.href = "home.php"
+     window.location.href = "' . $DESTINATION . '";
      </script>';
+     $_SESSION["destination"] = null;
 
     }
 
