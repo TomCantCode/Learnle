@@ -40,22 +40,23 @@
         <div>
 
           <?php 
-          //Sets right menu depending whether user is signed in
+          
+          //Sets displayed profile image, either a teacher or student, depending on users account type
           if(isset($_SESSION["username"])) {
             if(($_SESSION["type"]) == 't') {
               $image = 'teacher';
             }
             else {
-              //Sets displayed profile image, either a teacher or student, depending on users account type
               $image = 'student';
             }
 
+            //Sets right menu depending whether user is signed in
             echo 
             '<div class = "dropdown">
               <button class = "dropbutton"><img class = "icon" src = "images/' . $image . '.png" height = "64px" width = "64px"></button>
                 <div class = "droplist">
                   <pre>' . $_SESSION["username"] . '</pre>
-                  <a href="resources/personal-library.php" target="_self">Personal Library</a><br>
+                  <a href="personal-library.php" target="_self">Personal Library</a><br>
                   <a href="resources/logout.php" target="_self">Logout</a><br>
                 </div>
             </div>';
