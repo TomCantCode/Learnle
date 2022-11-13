@@ -10,8 +10,8 @@
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
-    $_SESSION["destination"] = $_SERVER['SCRIPT_NAME'];
-    header('Location: login.php');
+    $_SESSION["destination"] = str_replace(".php","",$_SERVER['SCRIPT_NAME']);
+    header('Location: login');
   }
 
 

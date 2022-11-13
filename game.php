@@ -9,13 +9,13 @@
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
-    $_SESSION["destination"] = $_SERVER['SCRIPT_NAME'];
-    header('Location: login.php');
+    $_SESSION["destination"] = str_replace(".php","",$_SERVER['SCRIPT_NAME']);
+    header('Location: login');
   }
 
   //Checks if user has been sent from a valid page (and given a Set ID)
   if(!isset($_COOKIE["setID"])) {
-    header('Location: home.php');
+    header('Location: home');
   }
 
   //Gets the set and terms from the database

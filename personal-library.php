@@ -12,8 +12,8 @@
   
     //Checks if user is signed in, else sent to login page
     if(!isset($_SESSION["username"])) {
-        $_SESSION["destination"] = "personal-library.php";
-        header('Location: login.php');
+        $_SESSION["destination"] = str_replace(".php","",$_SERVER['SCRIPT_NAME']);
+        header('Location: login');
     }
 
     //Gets all the sets the user has created from the database
@@ -57,7 +57,7 @@
 <div class = "menu">
 
     <div class = "menuleft">
-      <a href = "home.php">
+      <a href = "home">
         <img class = "logo" src = "images/logo.png" height = "60px" width = "60px">
       </a>
       
@@ -88,7 +88,7 @@
               <button class = "dropbutton"><img class = "icon" src = "images/' . $image . '.png" height = "64px" width = "64px"></button>
                 <div class = "droplist">
                   <pre>' . $_SESSION["username"] . '</pre>
-                  <a href="resources/logout.php" class="link" target="_self">Logout</a><br>
+                  <a href="resources/logout" class="link" target="_self">Logout</a><br>
                 </div>
             </div>';
           }
@@ -120,7 +120,7 @@
                 <div class = "row">
                   <div>'.$SETTAGS_U[$a].'</div>
                   <div class = "button">
-                    <a href="game.php" class="roundbutton" id = "play">Play</a>
+                    <a href="game" class="roundbutton" id = "play">Play</a>
                   </div>
                 </div>
             </div>';

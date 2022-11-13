@@ -51,7 +51,7 @@
 
      //Sent to homepage/orignal destination
      if(!isset($_SESSION["destination"])) {
-      $DESTINATION = "home.php";
+      $DESTINATION = "home";
      }
      else {
       $DESTINATION = $_SESSION["destination"];
