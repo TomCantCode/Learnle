@@ -13,6 +13,16 @@
     header('Location: login.php');
   }
 
+  //Checks if user has been sent from a valid page (and given a Set ID)
+  if(!isset($_COOKIE["setID"])) {
+    header('Location: home.php');
+  }
+
+  //Gets the set and terms from the database
+  $SETID = $_COOKIE["setID"];
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +45,7 @@
 <div class = "menusmall">
 
     <div class = "menuleft">
-      <a href = "home.php">
+      <a href = "home">
         <img class = "logo" src = "images/logo.png" height = "40px" width = "40px">
       </a>
       
@@ -53,12 +63,15 @@
 </div>
 
 <body>
-  
+
+  <div class = "progress-bar">
+  </div>
+    
   <div id="grid-container">
   </div>
-  
+
   <script src="resources/learnle.js">
-    
+    create_grid('grid-container', MAXGUESSES, ANSWER.length);
   </script>
 
 
