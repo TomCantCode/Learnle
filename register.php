@@ -123,14 +123,14 @@
 
         Name:               <input type= "text" id= "name" name= "name" required><br>
         Email:              <input type= "text" id= "email" name= "email" required><br>
-        Date of Birth:      <input type= "date" id= "dob" name= "dob" required><br>
+        Date of Birth:      <input type= "date" id= "dob" name= "dob" min="1900-01-01" max="<?php $d = strtotime("-5 years"); echo date("Y-m-d", $d); ?>" required><br>
         Account Type:       <select id= "acctype" name= "acctype" required>
           <option value= "s">Student</option>
           <option value= "t">Teacher</option>
         </select><br>
         Password:           <input type= "password" id= "password" name= "password" required><br>
         Confirm Password:   <input type= "password" id= "cpassword" name= "cpassword" required><br><br>
-        <input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm">   <input type= "reset" class = "smallbutton" required>
+        <div class = "button"><input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm"></div>   <div class = "button"><input type= "reset" class = "smallbutton" required></div>
 
         <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>

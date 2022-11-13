@@ -10,7 +10,7 @@
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
-    $_SESSION["destination"] = "creator.php";
+    $_SESSION["destination"] = $_SERVER['SCRIPT_NAME'];
     header('Location: login.php');
   }
 
@@ -171,7 +171,10 @@
     
       <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>" autocomplete="off">
 
-        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<input type = "submit" class = "smallbutton" value = "Save set" name = "confirm"><br><br>
+        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp
+        <div class = "button">
+          <input type = "submit" class = "smallbutton" id= "save" value = "Save set" name = "confirm"><br><br>
+        </div>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR" required> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" > <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" ><br><br>
         Keyboard Type:&nbsp&nbsp
         <select id= "keyboard" name= "keyboard" required><br>
@@ -181,9 +184,13 @@
         
         <br>Number of Terms: &nbsp&nbsp
         <div class = "row">
-          <input type = "button" class = "smallbutton" value = " + " id = "addterm">&nbsp&nbsp
+          <div class = "button">
+            <input type = "button" class = "smallbutton" value = " + " id = "addterm">&nbsp&nbsp
+          </div>
           <div id = "termcount">1</div>&nbsp&nbsp
-          <input type = "button" class = "smallbutton" value = " - " id = "removeterm">
+          <div class = "button">
+            <input type = "button" class = "smallbutton" value = " - " id = "removeterm">
+          </div>
         </div>
         
         <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>

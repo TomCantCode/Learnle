@@ -119,7 +119,9 @@
                 <div>'.$SETNAMES_U[$a].'</div><br>
                 <div class = "row">
                   <div>'.$SETTAGS_U[$a].'</div>
-                  <a href="game.php" class="roundbutton" id = "play">Play</a>
+                  <div class = "button">
+                    <a href="game.php" class="roundbutton" id = "play">Play</a>
+                  </div>
                 </div>
             </div>';
         }

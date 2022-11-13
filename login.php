@@ -94,7 +94,7 @@
     <div class = "menuright">
         <div>
           <pre>Don't have an Account?</pre>
-          <a href="register.php" target="_self">Register</a><br>
+          <a href="register.php" class = "link" target="_self">Register</a><br>
         </div>
     </div>
 
@@ -114,7 +114,7 @@
         Name:               <input type= "text" id= "name" name= "name" required><br>
         Email:              <input type= "text" id= "email" name= "email" required><br>
         Password:           <input type= "password" id= "password" name= "password" required><br>
-        <input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm">   <input type= "reset" class = "smallbutton" required>
+        <div class = "button"><input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm"></div>   <div class = "button"><input type= "reset" class = "smallbutton" required></div>
 
         <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
