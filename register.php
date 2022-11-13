@@ -94,7 +94,7 @@
 <div class = "menusmall">
 
     <div class = "menuleft">
-      <a href = "home.php">
+      <a href = "home">
         <img class = "logo" src = "images/logo.png" height = "40px" width = "40px">
       </a>
       
@@ -104,7 +104,7 @@
     <div class = "menuright">
         <div>
           <pre>Already have an Account?</pre>
-          <a href="login.php" class="link" target="_self">Log In</a><br>
+          <a href="login" class="link" target="_self">Log In</a><br>
         </div>
     </div>
   

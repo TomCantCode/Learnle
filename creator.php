@@ -121,7 +121,7 @@
 
      echo '<script type="text/JavaScript"> 
      alert("Set added!");
-     window.location.href = "home.php"
+     window.location.href = "home"
      </script>';
 
     }
@@ -144,7 +144,7 @@
 <div class = "menusmall">
 
     <div class = "menuleft">
-      <a href = "home.php">
+      <a href = "home">
         <img class = "logo" src = "images/logo.png" height = "40px" width = "40px">
       </a>
       

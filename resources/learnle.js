@@ -1,8 +1,8 @@
-var TERMS = ['FIVER', 'CHEESE', 'SLICED', 'DOGS', 'GRIPPERS', 'CHILD', 'WARZONE', 'QWERTYUIOP', 'GRID'];
-var GUESSES = [''];
-var GUESSNUM = 0;
-var FREEZE = false;
-var start = false;
+
+var squareNum = 0;
+const legalInputs = [
+  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+];
 
 function create_grid(name, x, y) {
 
@@ -21,28 +21,8 @@ function create_grid(name, x, y) {
     grid.appendChild(square);
   }
 
-  //var newpos = (((703 - (50 * y) - (2 * (y - 1))) / 2) / 7.03) + '%'
-  //var newpos = ((703  - (50 * y) - (2 * (y - 1)))/2)/0.703 + 'px'
-  //alert(newpos)
-  //var r = document.querySelector(':root');
-  //r.style.setProperty('--centre-pos', newpos);
-
 }
 
-function reset_grid(name) {
-  document.getElementById(name).innerHTML = '';
-  l++;
-  ANSWER = TERMS[l];
-  squareNum = 0;
-  GUESSNUM = -1;
-  GUESSES = [''];
-  MAXGUESSES = ANSWER.length + 1;   
-  if (l >= TERMS.length) {
-    end()
-  }
-  create_grid('grid-container', MAXGUESSES, ANSWER.length);
-  
-};
 
 function grid_add_string(name, string, row) {
 
@@ -68,21 +48,10 @@ function grid_add_string(name, string, row) {
   };
 
   if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER || GUESSNUM == (MAXGUESSES - 1)) {
-    FREEZE = true;
-    
-    reset_grid('grid-container');
+    //move on
   };
 
 };
-
-function end() {
-  alert('Set complete!!')
-};
-
-
-var squareNum = 0;
-const legalInputs =
-  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 
 window.addEventListener('keydown', function(event) {
@@ -124,46 +93,4 @@ window.addEventListener('keydown', function(event) {
 
 }, false);
 
-
-//check out require.js to make this work
-//var Typo = require('Typo.js-master/typo/typo-js');
-//var dictionary = new Typo('en_US', false, false, { dictionaryPath: 'Typo.js-master/typo/dictionaries' });
-
-
-var MAXGUESSES = 0;
-var l = 0;
-
-var ANSWER = TERMS[l];
-MAXGUESSES = ANSWER.length + 1;   
-create_grid('grid-container', MAXGUESSES, ANSWER.length);
-
   
-  
-//function check(){
-//  alert('help me please kwgjlargjerko')
-//  if (FREEZE == false) {
-//    var ANSWER = TERMS[l];
- //   var MAXGUESSES = ANSWER.length + 1;                          
- //   create_grid('grid-container', MAXGUESSES, ANSWER.length);
-//   break;
-//
- // } else if (FREEZE == true) {
-//   delete_grid('grid-container');
- //   FREEZE == false;
- //   check();
-//   
- // }; 
-// 
-//};
-
-  
-//if (start == false) {
-//  start == true;
-//  check();
-// }
-
-
-//grid_add_string('grid-container', 'test.', GUESSNUM);
-
-//create_grid('grid-container', 6, 5);
-//devare_grid('grid-container');

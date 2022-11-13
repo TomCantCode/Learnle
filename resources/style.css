@@ -446,7 +446,7 @@ footer{
 #grid-container {
     display: grid;
     margin: auto;
-    margin-top: 150px;
+    margin-top: 100px;
     justify-content: center;
     position: relative;
     margin-bottom: 50px;
