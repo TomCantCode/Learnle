@@ -3,10 +3,12 @@ var squareNum = 0;
 const legalInputs = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
+var next = true;
 
-function create_grid(name, x, y, numatt) {
+function create_grid(x, y, hint) {
+  var HINT = hint
   var GUESSNUM = numatt
-  var grid = document.getElementById(name);
+  var grid = document.getElementById('grid-container');
   grid.style.gridTemplateColumns = '';
   var total = x * y;
 
@@ -48,7 +50,7 @@ function grid_add_string(name, string, row) {
   };
 
   if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER || GUESSNUM == (MAXGUESSES - 1)) {
-    //move on
+    setTimeout(function(){next = true},3000)
   };
 
 };
@@ -92,5 +94,31 @@ window.addEventListener('keydown', function(event) {
   }
 
 }, false);
+
+
+function main_loop(terms, attemptnums, hints) {
+
+  var Terms = []
+  var NumAtts = []
+  var Hints = []
+
+  Terms = terms
+  NumAtts = attemptnums
+  Hints = hints
+
+  for(current = 0; current < terms.length; current++) {
+    next = false
+
+    create_grid(Terms[current], NumAtts[current], Hints[current])
+
+    while(next = false) {
+      null
+    }
+
+    squareNum = 0
+    document.getElementById('grid-container').innerHTML = '';
+
+  }
+}
 
   

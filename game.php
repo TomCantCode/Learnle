@@ -100,9 +100,16 @@
   </div>
 
   <?php
-    echo'<script src="resources/learnle.js">
-      create_grid("grid-container", '.$.', '.$.', '.$.');
-    </script>'
+    for($y = 1; $y <= count($TERMNAMES_U); $y++)
+      $gameComplete = FALSE;
+
+      echo'<script src="resources/learnle.js">
+        main_loop('.$TERMNAMES_U[$y].', '.$TERM_ATTS_U[$y].', '.$TERMDEFS_U[$y].');
+      </script>';
+      
+
+
+      
   ?>
 
 
