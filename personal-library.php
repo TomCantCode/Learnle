@@ -29,11 +29,13 @@
     //Puts all the set data into arrays
     else {
         $output_sets = '';
+        $SETIDS_U = array();
         $SETNAMES_U = array();
         $SETTAGS_U = array();
 
         for($x = 1; $x <= $columns; $x++){
             $ROW = mysqli_fetch_array($SQLREAD);
+            $SETIDS_U[$x] = $ROW["SetID"];
             $SETNAMES_U[$x] = $ROW["SetName"];
             $SETTAGS_U[$x] = $ROW["Tags"];
         }
@@ -112,15 +114,17 @@
 
      <?php
         //Display created sets
-          
+
         for($a = 1; $a <= $columns; $a++){
+            $LINK = ($_SESSION["setID"] = $SETIDS_U[$a]);
+
             echo '
             <div class = "set">
                 <div>'.$SETNAMES_U[$a].'</div><br>
                 <div class = "row">
                   <div>'.$SETTAGS_U[$a].'</div>
                   <div class = "button">
-                    <a href="game" class="roundbutton" id = "play">Play</a>
+                    <a href = "game" class = "roundbutton" action = <?php '.$LINK.'?> id = "play">Play</a>
                   </div>
                 </div>
             </div>';

@@ -87,7 +87,7 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href = "game" class = "link" action = "set()" id = "example-game" target = "_self">Play example game</a>
+     <a href = "game" class = "link" action = <?php $_SESSION["setID"] = 1;?> id = "example-game" target = "_self">Play example game</a>
     </div>
 
     

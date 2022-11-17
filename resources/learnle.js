@@ -4,8 +4,8 @@ const legalInputs = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
-function create_grid(name, x, y) {
-
+function create_grid(name, x, y, numatt) {
+  var GUESSNUM = numatt
   var grid = document.getElementById(name);
   grid.style.gridTemplateColumns = '';
   var total = x * y;
