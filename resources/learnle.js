@@ -1,18 +1,19 @@
 
 var squareNum = 0;
-const legalInputs = [
+var legalInputs = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
-var next = true;
 
-function create_grid(x, y, hint) {
-  var HINT = hint
-  var GUESSNUM = numatt
+
+function create_grid(word, numatt, hint) {
+
+  var HINT = hint;
+  var GUESSNUM = numatt;
   var grid = document.getElementById('grid-container');
   grid.style.gridTemplateColumns = '';
-  var total = x * y;
+  var total = word.length * numatt;
 
-  for (var b = 0; b < y; b++) {
+  for (var b = 0; b < numatt; b++) {
     grid.style.gridTemplateColumns += ' auto';
   }
 
@@ -22,9 +23,8 @@ function create_grid(x, y, hint) {
     square.className = 'square';
     grid.appendChild(square);
   }
-
+  
 }
-
 
 function grid_add_string(name, string, row) {
 
@@ -96,7 +96,7 @@ window.addEventListener('keydown', function(event) {
 }, false);
 
 
-function main_loop(terms, attemptnums, hints) {
+/*function main_loop(terms, attemptnums, hints) {
 
   var Terms = []
   var NumAtts = []
@@ -119,6 +119,4 @@ function main_loop(terms, attemptnums, hints) {
     document.getElementById('grid-container').innerHTML = '';
 
   }
-}
-
-  
+}*/
