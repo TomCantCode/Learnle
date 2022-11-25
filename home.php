@@ -2,7 +2,6 @@
 <?php
   session_start();
   $_SESSION["destination"] = null;
-
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +86,7 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href = "game" class = "link" action = <?php $_SESSION["setID"] = 1;?> id = "example-game" target = "_self">Play example game</a>
+     <a href = "game" class = "link" action = "<?php $_SESSION["setID"] = "1" ?>" id = "example-game" target = "_self">Play example game</a>  
     </div>
 
     
@@ -128,7 +127,7 @@
 </body>
 
 <?php
-  include 'resources/footer';
+  include 'resources/footer.php';
 ?>
   
 </html>
