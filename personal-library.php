@@ -116,7 +116,7 @@
         //Display created sets
 
         for($a = 1; $a <= $columns; $a++){
-            $LINK = ($_SESSION["setID"] = $SETIDS_U[$a]);
+            $LINK = '<?php '.($_SESSION["setID"] = $SETIDS_U[$a]).' ?>';
 
             echo '
             <div class = "set">
@@ -124,7 +124,7 @@
                 <div class = "row">
                   <div>'.$SETTAGS_U[$a].'</div>
                   <div class = "button">
-                    <a href = "game" class = "roundbutton" action = <?php '.$LINK.'?> id = "play">Play</a>
+                    <a href = "game" class = "roundbutton" action = "'.$LINK.'" id = "play">Play</a>
                   </div>
                 </div>
             </div>';
