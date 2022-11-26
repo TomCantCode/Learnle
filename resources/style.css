@@ -357,6 +357,11 @@ pre{
     cursor: inherit;
 }
 
+.smallbutton:hover{
+    background-color: var(--accent3);
+    transition: ease-in-out 0.3s;
+}
+
 .roundbutton{
     background-color: var(--accent2);
     color: inherit;
@@ -372,9 +377,25 @@ pre{
     transition: ease-in-out 0.2s;
 }
 
-.smallbutton:hover{
-    background-color: var(--accent3);
-    transition: ease-in-out 0.3s;
+.homebutton{
+    background-color: var(--accent2);
+    color: inherit;
+    border: 10px var(--accent2);
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    cursor: inherit;
+    text-decoration: none;
+    position: absolute;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.homebutton:hover{
+    transform: translate(-50%,-20%);
+    transition: ease-in-out 0.2s;
 }
 
 #play{
