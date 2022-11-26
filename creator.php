@@ -60,7 +60,7 @@
       $CURRENTDEF = ${"DEF-".$x};
 
       //If term is too long
-      if(!(strlen($CURRENTTERM) < 10)) {
+      if(!(strlen($CURRENTTERM) <= 15)) {
         $output = "Term is too long (Term: $x) $CURRENTTERM";
         $errors = true;
       }
