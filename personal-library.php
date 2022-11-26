@@ -42,6 +42,17 @@
 
     }
 
+
+    //If any of the play game buttons have been pressed, change page to the game and set the game ID
+    for($y = 1; $y <= $columns; $y++){
+
+      if(isset($_GET["play-".$y])) {
+          echo $SETIDS_U[$y];
+          $_SESSION["setID"] = $SETIDS_U[$y];
+          header('Location: game');
+      }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -116,16 +127,16 @@
         //Display created sets
 
         for($a = 1; $a <= $columns; $a++){
-            $LINK = '<?php '.($_SESSION["setID"] = $SETIDS_U[$a]).' ?>';
-
             echo '
             <div class = "set">
                 <div>'.$SETNAMES_U[$a].'</div><br>
                 <div class = "row">
                   <div>'.$SETTAGS_U[$a].'</div>
-                  <div class = "button">
-                    <a href = "game" class = "roundbutton" action = "'.$LINK.'" id = "play">Play</a>
-                  </div>
+                  <form method = "GET" action = "'. $_SERVER["PHP_SELF"] .'"">
+                    <div class = "button">
+                      <input type = "submit" class = "roundbutton" name = "play-'.$a.'" id = "play" value = "Play">
+                    </div>
+                  </form>
                 </div>
             </div>';
         }

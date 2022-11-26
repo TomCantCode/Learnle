@@ -2,6 +2,12 @@
 <?php
   session_start();
   $_SESSION["destination"] = null;
+
+  //If play game button has been pressed, change page to the game and set the game ID
+  if(isset($_POST["example-game"])) {
+    $_SESSION["setID"] = 1;
+    header('Location: game');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +92,12 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href = "game" class = "link" action = "<?php $_SESSION["setID"] = "1" ?>" id = "example-game" target = "_self">Play example game</a>  
+     <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+        <div class = "button">
+          <input type = "submit" class = "homebutton" name = "example-game" value = "Play example game">
+        </div>
+     </form>
+     
     </div>
 
     
@@ -102,7 +113,9 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <a href = "creator" class = "link" target = "_self">Set Creator</a>
+     <div class = "button">
+      <a href = "creator" class = "homebutton" target = "_self">Set Creator</a>
+     </div>
 
     </div>
 
@@ -121,8 +134,6 @@
     
   </div>
 
-  
-  <script src = "resources/general.js"></script>
 
 </body>
 
