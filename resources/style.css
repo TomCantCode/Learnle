@@ -472,6 +472,20 @@ footer{
     position: relative;
     margin-bottom: 50px;
 }
+
+#hint {
+    margin: auto;
+    max-height: fit-content;
+    max-width: 620px;
+    min-width: 200px;
+    padding: 10px;
+    position: relative;
+    text-align: left;
+
+    background: var(--fullbg);
+    opacity: 0.75;
+    display: none;
+}
   
 .square {
     background: var(--defaultbg);

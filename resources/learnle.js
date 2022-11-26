@@ -1,19 +1,28 @@
 
+//Global variables
 var squareNum = 0;
 var legalInputs = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
+var ANSWER = 0;
+var current = 0;
 
+var ALLGUESSES = [];
+var GUESSES = [];
+var GUESSNUM = 0;
+var MAXGUESSES = '';
+var next = false;
 
 function create_grid(word, numatt, hint) {
 
   var HINT = hint;
-  var GUESSNUM = numatt;
+  ANSWER = word;
+  MAXGUESSES = numatt;
   var grid = document.getElementById('grid-container');
   grid.style.gridTemplateColumns = '';
   var total = word.length * numatt;
 
-  for (var b = 0; b < numatt; b++) {
+  for (var b = 0; b < word.length; b++) {
     grid.style.gridTemplateColumns += ' auto';
   }
 
@@ -23,7 +32,7 @@ function create_grid(word, numatt, hint) {
     square.className = 'square';
     grid.appendChild(square);
   }
-  
+
 }
 
 function grid_add_string(name, string, row) {
@@ -86,37 +95,56 @@ window.addEventListener('keydown', function(event) {
 
       grid_add_string('grid-container', String(GUESSES[GUESSNUM]).replace(undefined, ''), GUESSNUM);
       GUESSNUM += 1;
+
+      if(GUESSES = (MAXGUESSES/2).round()) {
+        var hint = document.getElementById('Hint');
+        hint.style.display = block;
+      }
     }
 
     else {
       alert('Invalid length of guess');
     }
+
   }
 
 }, false);
 
 
-/*function main_loop(terms, attemptnums, hints) {
+function main_loop(terms, attemptnums, hints) {
 
   var Terms = []
   var NumAtts = []
   var Hints = []
+  
+  terms = terms.replace('[', '')
+  terms = terms.replace(']', '')
+  terms = terms.toUpperCase()
+  attemptnums = attemptnums.toString()
+  attemptnums = attemptnums.replace('[', '')
+  attemptnums = attemptnums.replace(']', '')
+  hints = hints.replace('[', '')
+  hints = hints.replace(']', '')
 
-  Terms = terms
-  NumAtts = attemptnums
-  Hints = hints
+  Terms = terms.split(",")
+  NumAtts = attemptnums.split(",")
+  Hints = hints.split(",")
 
-  for(current = 0; current < terms.length; current++) {
+
+  for(current = 0; current < 1; current++) {
     next = false
 
-    create_grid(Terms[current], NumAtts[current], Hints[current])
-
-    while(next = false) {
-      null
-    }
-
     squareNum = 0
+    ALLGUESSES[current] = GUESSES
+    GUESSES = []
     document.getElementById('grid-container').innerHTML = '';
+    
+   
+    create_grid(Terms[current], NumAtts[current], Hints[current])
+    
 
   }
-}*/
+
+
+
+}

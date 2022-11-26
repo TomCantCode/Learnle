@@ -31,38 +31,18 @@
   $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
   $columns = mysqli_num_rows($SQLREAD);
 
-  $TERMNAMES_U = array();
-  $TERMDEFS_U = array();
-  $TERM_ATTS_U = array();
+  $TERMNAMES = array();
+  $TERMDEFS = array();
+  $TERM_ATTS = array();
 
   for($x = 1; $x <= $columns; $x++) {
     $ROW = mysqli_fetch_array($SQLREAD);
-    $TERMNAMES_U[$x] = $ROW["Term"];
-    $TERMDEFS_U[$x] = $ROW["Def"];
-    $TERM_ATTS_U[$x] = $ROW["NumAtt"];
+    $TERMNAMES[$x] = $ROW["Term"];
+    $TERMDEFS[$x] = $ROW["Def"];
+    $TERM_ATTS[$x] = $ROW["NumAtt"];
   }
 
-  //unset($_SESSION["setID"])
-  
-  echo '<script type = "text/javascript" src="resources/learnle.js"></script>';
-
-  for($y = 1; $y <= count($TERMNAMES_U); $y++){
-    $gameComplete = FALSE;
-
-    echo '<script>
-          create_grid("'.$TERMNAMES_U[$y].'", '.$TERM_ATTS_U[$y].', "'.$TERMDEFS_U[$y].'");
-        </script>';
-
-    while($gameComplete == FALSE){
-    //  null;
-    }
-
-  }
-
-
-
-
-
+  //unset($_SESSION["setID"]);
 
 ?>
 
@@ -75,6 +55,7 @@
   <title>Play!</title>
   <link href="resources/style.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="images/logo.png" type="image">
+  <script type = "text/javascript" src="resources/learnle.js"></script>
 </head>
 
 <style>
@@ -114,10 +95,25 @@
   <div class = "progress-bar">
   </div>
     
-  <div id="grid-container">
+  <div id = "grid-container">
   </div>
 
+  <div id = "hint"> Hint: 
+  </div>
+
+  <?php
+    $gameComplete = FALSE;
+    
+    echo '<script>
+          main_loop("['.implode(",",$TERMNAMES).']", ['.implode(",",$TERM_ATTS).'], "['.implode(",",$TERMDEFS).']");
+        </script>';
+
+    //while($gameComplete == FALSE){
+    //  null;
+    //}
+
   
+  ?>
 
 
 </body>
