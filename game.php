@@ -54,7 +54,7 @@
         </script>';
 
     while($gameComplete == FALSE){
-      null;
+    //  null;
     }
 
   }
