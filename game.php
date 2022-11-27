@@ -93,7 +93,7 @@
 
 
   <div id = "progress-bar">
-    <div id = "progress"></div>
+    <div id = "progress">0%</div>
   </div>
     
   <div id = "grid-container">

@@ -161,7 +161,10 @@ function progress_update(progress) {
   if (i == 0) {
     i = 1;
     var bar = document.getElementById("progress");
-    var width = 1;
+    var width = bar.innerHTML.replace("%","");
+    alert(bar.innerHTML)
+    alert(width)
+    width = parseInt(width)
     var id = setInterval(frame, 10);
     function frame() {
       if (width >= progress) {
@@ -217,7 +220,7 @@ function round_over(status) {
   }
 }
 
-function gameEnd(){
+function gameEnd() {
   document.getElementById('grid-container').innerHTML = '';
   ALLGUESSES[current] = '['+GUESSES+']';
   ALLGUESSES.shift()
