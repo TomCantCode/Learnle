@@ -162,8 +162,6 @@ function progress_update(progress) {
     i = 1;
     var bar = document.getElementById("progress");
     var width = bar.innerHTML.replace("%","");
-    alert(bar.innerHTML)
-    alert(width)
     width = parseInt(width)
     var id = setInterval(frame, 10);
     function frame() {
@@ -205,10 +203,10 @@ function nextgrid() {
 
 function round_over(status) {
   if(status == 'W'){
-    alert('Win')
+    alert('Well Done!')
   }
   else{
-    alert('Loss')
+    alert('Better luck next time!')
   }
 
   if(current < Terms.length) {
@@ -224,5 +222,12 @@ function gameEnd() {
   document.getElementById('grid-container').innerHTML = '';
   ALLGUESSES[current] = '['+GUESSES+']';
   ALLGUESSES.shift()
-  document.getElementById('allguesses').innerHTML = ALLGUESSES;
+  document.cookie=`all_guesses=`+ ALLGUESSES;
+
+
+  document.getElementById('all_guesses').innerHTML = ALLGUESSES;
+}
+
+window.onbeforeunload = function() {
+  document.cookie = "all_guesses = ; expires = 01 Jan 1900 00:00:00 UTC";
 }

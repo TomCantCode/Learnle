@@ -39,3 +39,8 @@ function removeTerm() {
 document.getElementById("addterm").addEventListener("click", addTerm);
 
 document.getElementById("removeterm").addEventListener("click", removeTerm);
+
+
+window.onbeforeunload = function() {
+    document.cookie = "term_count_uid = ; expires = 01 Jan 1900 00:00:00 UTC";
+}
