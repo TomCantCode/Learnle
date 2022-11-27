@@ -102,17 +102,16 @@
   <div id = "hint"> Hint: 
   </div>
 
+  <div id = "allguesses">
+
+  </div>
+
   <?php
     $gameComplete = FALSE;
     
     echo '<script>main_loop("['.implode(",",$TERMNAMES).']", ['.implode(",",$TERM_ATTS).'], "['.implode(",",$TERMDEFS).']");
         </script>';
 
-    //while($gameComplete == FALSE){
-    //  null;
-    //}
-
-  
   ?>
 
 

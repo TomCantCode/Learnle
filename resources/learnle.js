@@ -16,6 +16,7 @@ var GUESSES = [];
 var GUESSNUM = 0;
 var MAXGUESSES = 0;
 var next = false;
+var AllowKeyPress = true;
 
 function create_grid(word, numatt, hint) {
 
@@ -66,7 +67,8 @@ function grid_add_string(name, string, row) {
   };
 
   if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER) {
-    setTimeout(function(){round_over('W');alert('yes')},1500)
+    AllowKeyPress = false; 
+    setTimeout(function(){round_over('W');},100)
   };
 
 };
@@ -74,51 +76,53 @@ function grid_add_string(name, string, row) {
 
 window.addEventListener('keydown', function(event) {
   
-  if ((event.key == 'Backspace') && squareNum > GUESSNUM * ANSWER.length) {
-    squareNum -= 1;
-    document.getElementById(squareNum).innerHTML = '';
-    document.getElementById(squareNum).className = 'square';
-  }
+  if(AllowKeyPress == true) {
+    if ((event.key == 'Backspace') && squareNum > GUESSNUM * ANSWER.length) {
+      squareNum -= 1;
+      document.getElementById(squareNum).innerHTML = '';
+      document.getElementById(squareNum).className = 'square';
+    }
 
-  if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
-    document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
-    document.getElementById(squareNum).className += ' full';
-    squareNum += 1;
-  }
+    if (legalInputs.includes(event.key) && ((squareNum - GUESSNUM * ANSWER.length) < ANSWER.length)) {
+      document.getElementById(squareNum).innerHTML = `${event.key}`.toUpperCase();
+      document.getElementById(squareNum).className += ' full';
+      squareNum += 1;
+    }
 
-  if (event.code == 'Enter') {
+    if (event.code == 'Enter') {
 
-    var trialGuess = '';
-    for (var i = 0; i < ANSWER.length; i++) {
+      var trialGuess = '';
+      for (var i = 0; i < ANSWER.length; i++) {
         var currentletter = (document.getElementById(i + (ANSWER.length * (GUESSNUM))).innerHTML);
         trialGuess += currentletter
       }
 
     
-    if (((squareNum - (GUESSNUM * ANSWER.length)) == ANSWER.length) /*&& (dictionary.check(trialGuess.replace(undefined, '')))*/) {
+      if (((squareNum - (GUESSNUM * ANSWER.length)) == ANSWER.length) /*&& (dictionary.check(trialGuess.replace(undefined, '')))*/) {
 
-      GUESSES[GUESSNUM] = trialGuess.replace(undefined, '');
+        GUESSES[GUESSNUM] = trialGuess.replace(undefined, '');
       
 
-      grid_add_string('grid-container', String(GUESSES[GUESSNUM]).replace(undefined, ''), GUESSNUM);
-      GUESSNUM += 1;
+        grid_add_string('grid-container', String(GUESSES[GUESSNUM]).replace(undefined, ''), GUESSNUM);
+        GUESSNUM += 1;
 
-      if(GUESSNUM == Math.round(MAXGUESSES - 1)) {
-        var hint = document.getElementById('hint');
-        hint.style.display = "block";
-        hint.innerHTML += HINT; 
+        if(GUESSNUM == Math.round(MAXGUESSES - 1)) {
+          var hint = document.getElementById('hint');
+          hint.style.display = "block";
+          hint.innerHTML += HINT; 
+        }
+      
+        if(GUESSNUM == MAXGUESSES) {
+          round_over('L')
+        }
+
       }
-      
-      if(GUESSNUM == MAXGUESSES) {
-        round_over('L')
+
+      else {
+        alert('Invalid length of guess');
       }
 
     }
-
-    else {
-      alert('Invalid length of guess');
-    }
-
   }
 
 }, false);
@@ -176,12 +180,17 @@ function nextgrid() {
 
   squareNum = 0;
   GUESSNUM = 0;
-  ALLGUESSES[current] = GUESSES;
+  AllowKeyPress = true;
+  ALLGUESSES[current] = '['+GUESSES+']';
+  GUESSES = [];
+
   var hint = document.getElementById('hint');
   hint.style.display = "none";
   hint.innerHTML = " Hint: ";
-  GUESSES = [];
+
   document.getElementById('grid-container').innerHTML = '';
+
+  document.getElementById('allguesses').innerHTML = ALLGUESSES;
     
     
   create_grid(Terms[current], NumAtts[current], Hints[current])
@@ -203,6 +212,14 @@ function round_over(status) {
     nextgrid()
   }
   else {
+    progress_update(Math.round((current / Terms.length) * 100))
     gameEnd() 
   }
+}
+
+function gameEnd(){
+  document.getElementById('grid-container').innerHTML = '';
+  ALLGUESSES[current] = '['+GUESSES+']';
+  ALLGUESSES.shift()
+  document.getElementById('allguesses').innerHTML = ALLGUESSES;
 }
