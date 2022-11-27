@@ -14,7 +14,7 @@ var Hints = []
 var ALLGUESSES = [];
 var GUESSES = [];
 var GUESSNUM = 0;
-var MAXGUESSES = '';
+var MAXGUESSES = 0;
 var next = false;
 
 function create_grid(word, numatt, hint) {
@@ -65,8 +65,8 @@ function grid_add_string(name, string, row) {
 
   };
 
-  if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER || GUESSNUM == (MAXGUESSES - 1)) {
-    setTimeout(function(){next = true;alert('yes')},1500)
+  if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER) {
+    setTimeout(function(){round_over('W');alert('yes')},1500)
   };
 
 };
@@ -106,8 +106,13 @@ window.addEventListener('keydown', function(event) {
       if(GUESSNUM == Math.round(MAXGUESSES - 1)) {
         var hint = document.getElementById('hint');
         hint.style.display = "block";
-        hint.innerHTML += HINT;
+        hint.innerHTML += HINT; 
       }
+      
+      if(GUESSNUM == MAXGUESSES) {
+        round_over('L')
+      }
+
     }
 
     else {
@@ -140,25 +145,11 @@ function main_loop(terms, attemptnums, hints) {
 
   var total = 1;
 
-  for(current = 0; current < total; current++) {
-    next = true
+  current = 0;
+  next = true;
 
-    squareNum = 0
-    ALLGUESSES[current] = GUESSES
-    var hint = document.getElementById('hint');
-    hint.style.display = "none";
-    hint.innerHTML = " Hint: ";
-    GUESSES = []
-    document.getElementById('grid-container').innerHTML = '';
-    
-    
-    create_grid(Terms[current], NumAtts[current], Hints[current])
-    progress_update(Math.round((current + 1 / Terms.length) * 100))
-    
-  }
-
-
-
+  
+  nextgrid();
 }
 
 function progress_update(progress) {
@@ -178,5 +169,40 @@ function progress_update(progress) {
         bar.innerHTML = width + "%";
       }
     }
+  }
+}
+
+function nextgrid() {
+
+  squareNum = 0;
+  GUESSNUM = 0;
+  ALLGUESSES[current] = GUESSES;
+  var hint = document.getElementById('hint');
+  hint.style.display = "none";
+  hint.innerHTML = " Hint: ";
+  GUESSES = [];
+  document.getElementById('grid-container').innerHTML = '';
+    
+    
+  create_grid(Terms[current], NumAtts[current], Hints[current])
+  progress_update(Math.round((current / Terms.length) * 100))
+
+  current += 1
+    
+}
+
+function round_over(status) {
+  if(status == 'W'){
+    alert('Win')
+  }
+  else{
+    alert('Loss')
+  }
+
+  if(current < Terms.length) {
+    nextgrid()
+  }
+  else {
+    gameEnd() 
   }
 }
