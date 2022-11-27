@@ -119,6 +119,7 @@
         }
       }
 
+
      echo '<script type="text/JavaScript"> 
      alert("Set added!");
      window.location.href = "home"

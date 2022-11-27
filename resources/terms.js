@@ -1,5 +1,6 @@
 var TERMNUM = 1;
-document.cookie=`term_count_uid=`+TERMNUM;   
+document.cookie=`term_count_uid=`+TERMNUM;
+var SAVED = false   
 
 function addTerm() {
     TERMNUM += 1;
@@ -40,7 +41,13 @@ document.getElementById("addterm").addEventListener("click", addTerm);
 
 document.getElementById("removeterm").addEventListener("click", removeTerm);
 
+document.getElementById("save").addEventListener("click", function(){SAVED = true})
 
 window.onbeforeunload = function() {
-    document.cookie = "term_count_uid = ; expires = 01 Jan 1900 00:00:00 UTC";
+  document.cookie = "term_count_uid = ; expires = 01 Jan 1900 00:00:00 UTC";
+    
+  if(!SAVED) {
+    return("Are you sure you want to leave before finishing the game?")
+  }
+  return undefined;
 }

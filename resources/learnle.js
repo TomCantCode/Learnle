@@ -230,4 +230,9 @@ function gameEnd() {
 
 window.onbeforeunload = function() {
   document.cookie = "all_guesses = ; expires = 01 Jan 1900 00:00:00 UTC";
+
+  if(!(current == Terms.length)) {
+    return("Are you sure you want to leave before finishing the game?")
+  }
+  return undefined;
 }
