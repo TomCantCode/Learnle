@@ -7,6 +7,10 @@ var legalInputs = [
 var ANSWER = 0;
 var current = 0;
 
+var Terms = []
+var NumAtts = []
+var Hints = []
+
 var ALLGUESSES = [];
 var GUESSES = [];
 var GUESSNUM = 0;
@@ -15,23 +19,26 @@ var next = false;
 
 function create_grid(word, numatt, hint) {
 
-  var HINT = hint;
-  ANSWER = word;
-  MAXGUESSES = numatt;
-  var grid = document.getElementById('grid-container');
-  grid.style.gridTemplateColumns = '';
-  var total = word.length * numatt;
+  if(next = true) {
+    globalThis.HINT = hint;
+    ANSWER = word;
+    MAXGUESSES = numatt;
+    var grid = document.getElementById('grid-container');
+    grid.style.gridTemplateColumns = '';
+    var total = word.length * numatt;
 
-  for (var b = 0; b < word.length; b++) {
-    grid.style.gridTemplateColumns += ' auto';
-  }
+    for (var b = 0; b < word.length; b++) {
+      grid.style.gridTemplateColumns += ' auto';
+    }
 
-  for (var a = 0; a < total; a++) {
-    var square = document.createElement('div');
-    square.setAttribute('id', a)
-    square.className = 'square';
-    grid.appendChild(square);
+    for (var a = 0; a < total; a++) {
+      var square = document.createElement('div');
+      square.setAttribute('id', a)
+      square.className = 'square';
+      grid.appendChild(square);
+    }
   }
+  next = false;
 
 }
 
@@ -59,7 +66,7 @@ function grid_add_string(name, string, row) {
   };
 
   if (GUESSES[GUESSNUM].replace(undefined, '') == ANSWER || GUESSNUM == (MAXGUESSES - 1)) {
-    setTimeout(function(){next = true},3000)
+    setTimeout(function(){next = true;alert('yes')},1500)
   };
 
 };
@@ -96,9 +103,10 @@ window.addEventListener('keydown', function(event) {
       grid_add_string('grid-container', String(GUESSES[GUESSNUM]).replace(undefined, ''), GUESSNUM);
       GUESSNUM += 1;
 
-      if(GUESSES = (MAXGUESSES/2).round()) {
-        var hint = document.getElementById('Hint');
-        hint.style.display = block;
+      if(GUESSNUM == Math.round(MAXGUESSES - 1)) {
+        var hint = document.getElementById('hint');
+        hint.style.display = "block";
+        hint.innerHTML += HINT;
       }
     }
 
@@ -113,9 +121,9 @@ window.addEventListener('keydown', function(event) {
 
 function main_loop(terms, attemptnums, hints) {
 
-  var Terms = []
-  var NumAtts = []
-  var Hints = []
+  Terms = []
+  NumAtts = []
+  Hints = []
   
   terms = terms.replace('[', '')
   terms = terms.replace(']', '')
@@ -130,21 +138,45 @@ function main_loop(terms, attemptnums, hints) {
   NumAtts = attemptnums.split(",")
   Hints = hints.split(",")
 
+  var total = 1;
 
-  for(current = 0; current < 1; current++) {
-    next = false
+  for(current = 0; current < total; current++) {
+    next = true
 
     squareNum = 0
     ALLGUESSES[current] = GUESSES
+    var hint = document.getElementById('hint');
+    hint.style.display = "none";
+    hint.innerHTML = " Hint: ";
     GUESSES = []
     document.getElementById('grid-container').innerHTML = '';
     
-   
-    create_grid(Terms[current], NumAtts[current], Hints[current])
     
-
+    create_grid(Terms[current], NumAtts[current], Hints[current])
+    progress_update(Math.round((current + 1 / Terms.length) * 100))
+    
   }
 
 
 
+}
+
+function progress_update(progress) {
+  var i = 0
+  if (i == 0) {
+    i = 1;
+    var bar = document.getElementById("progress");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= progress) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        bar.style.width = width + "%";
+        bar.innerHTML = width + "%";
+      }
+    }
+  }
 }

@@ -5,9 +5,10 @@
   --accent1: #2C4031;
   --accent2: #2B5937;
   --accent3: #2c403b;
+  --fadebg:  #1a1818ce;
 
   --titlecol: #CCBBBBBE;
-  --textcol: #BEBEBE;
+  --textcol:  #BEBEBE;
   --textcolb: #68636ED3;
 }
 
@@ -145,7 +146,6 @@
 }
 
 .menusmall .menuright{
-    padding-top: 10px;
     float: right;    
 }
 
@@ -159,11 +159,13 @@
 
 .menusmall .menuright p {
     width: 250px;
-    position: absolute;
-    top: 50%;
-    transform: translate(-100%,-100%);
+    position: relative;
+    /*top: 50%;
+    transform: translate(-100%,-100%);*/
     text-align: right;
-    font-size: 15px;  
+    line-height: 60px;
+    font-size: 15px;
+    margin: 0px;
 }
 
 .dropdown{
@@ -319,8 +321,7 @@ pre{
     position: relative;
     text-align: left;
 
-    background: var(--fullbg);
-    opacity: 0.75;
+    background: var(--fadebg);
 }
 
 .set{
@@ -332,8 +333,7 @@ pre{
     position: relative;
     text-align: left;
 
-    background: var(--fullbg);
-    opacity: 0.75;
+    background: var(--fadebg);
 }
 
 .row{
@@ -464,6 +464,22 @@ footer{
     --box-size: 20px;
 }
 
+#progress-bar {
+    width: 100%;
+    background: var(--fadebg);
+}
+  
+#progress {
+    line-height: 30px;
+    padding: 5px 0px;
+    font-size: 20px;
+    text-align: left;
+    width: 1%;
+    height: 30px;
+    background-color: var(--accent1);
+    background: linear-gradient(90deg, var(--accent3) 0%, var(--accent2) 57%);
+}
+
 #grid-container {
     display: grid;
     margin: auto;
@@ -482,8 +498,7 @@ footer{
     position: relative;
     text-align: left;
 
-    background: var(--fullbg);
-    opacity: 0.75;
+    background: var(--fadebg);
     display: none;
 }
   

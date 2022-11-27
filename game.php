@@ -92,7 +92,8 @@
 <body>
 
 
-  <div class = "progress-bar">
+  <div id = "progress-bar">
+    <div id = "progress"></div>
   </div>
     
   <div id = "grid-container">
@@ -104,8 +105,7 @@
   <?php
     $gameComplete = FALSE;
     
-    echo '<script>
-          main_loop("['.implode(",",$TERMNAMES).']", ['.implode(",",$TERM_ATTS).'], "['.implode(",",$TERMDEFS).']");
+    echo '<script>main_loop("['.implode(",",$TERMNAMES).']", ['.implode(",",$TERM_ATTS).'], "['.implode(",",$TERMDEFS).']");
         </script>';
 
     //while($gameComplete == FALSE){
