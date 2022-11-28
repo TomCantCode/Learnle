@@ -198,9 +198,9 @@ function nextgrid() {
 
   document.getElementById('allguesses').innerHTML = ALLGUESSES;
     
-    
   create_grid(Terms[current], NumAtts[current], Hints[current])
   progress_update(Math.round((current / Terms.length) * 100))
+  score_update()
 
   current += 1
     
@@ -229,6 +229,8 @@ function gameEnd() {
   ALLGUESSES.shift()
   document.cookie=`all_guesses=`+ ALLGUESSES;
 
+  document.getElementById('game-end').innerHTML = SCORE;
+
 
   document.getElementById('all_guesses').innerHTML = ALLGUESSES;
 }
@@ -245,6 +247,7 @@ window.onbeforeunload = function() {
 function score_update() {
   termScore *= 1.05 - (current * 0.05)
   SCORE += termScore;
-
+  Math.round(SCORE)
+  termScore = 0
   
 }

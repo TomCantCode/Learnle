@@ -102,8 +102,11 @@
   <div id = "hint"> Hint: 
   </div>
 
-  <div id = "allguesses">
+  <div id = "game-end">
 
+  </div>
+
+  <div id = "allguesses">
   </div>
 
   <?php
