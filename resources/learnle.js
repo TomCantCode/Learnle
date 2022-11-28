@@ -6,17 +6,19 @@ var legalInputs = [
 ];
 var ANSWER = 0;
 var current = 0;
+var next = false;
+var AllowKeyPress = true;
+var termScore = 0;
 
 var Terms = []
 var NumAtts = []
 var Hints = []
-
 var ALLGUESSES = [];
 var GUESSES = [];
+var SCORE = 0;
+
 var GUESSNUM = 0;
 var MAXGUESSES = 0;
-var next = false;
-var AllowKeyPress = true;
 
 function create_grid(word, numatt, hint) {
 
@@ -54,14 +56,17 @@ function grid_add_string(name, string, row) {
 
     if (newValue == ANSWER.charAt(a)) {
       gridNum.className += ' correct';
+      termScore += 10;
     }
 
     else if (ANSWER.includes(newValue)) {
       gridNum.className += ' incorrect';
+      termScore += 5;
     }
 
     else {
       gridNum.className += ' wrong';
+      termScore += 0;
     }
 
   };
@@ -235,4 +240,11 @@ window.onbeforeunload = function() {
     return("Are you sure you want to leave before finishing the game?")
   }
   return undefined;
+}
+
+function score_update() {
+  termScore *= 1.05 - (current * 0.05)
+  SCORE += termScore;
+
+  
 }
