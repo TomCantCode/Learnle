@@ -20,6 +20,7 @@ var SCORE = 0;
 var GUESSNUM = 0;
 var MAXGUESSES = 0;
 
+
 function create_grid(word, numatt, hint) {
 
   if(next = true) {
@@ -44,6 +45,7 @@ function create_grid(word, numatt, hint) {
   next = false;
 
 }
+
 
 function grid_add_string(name, string, row) {
 
@@ -161,6 +163,7 @@ function main_loop(terms, attemptnums, hints) {
   nextgrid();
 }
 
+
 function progress_update(progress) {
   var i = 0
   if (i == 0) {
@@ -181,6 +184,7 @@ function progress_update(progress) {
     }
   }
 }
+
 
 function nextgrid() {
 
@@ -206,6 +210,7 @@ function nextgrid() {
     
 }
 
+
 function round_over(status) {
   if(status == 'W'){
     alert('Well Done!')
@@ -223,26 +228,21 @@ function round_over(status) {
   }
 }
 
+
 function gameEnd() {
   document.getElementById('grid-container').innerHTML = '';
   ALLGUESSES[current] = '['+GUESSES+']';
   ALLGUESSES.shift()
   document.cookie=`all_guesses=`+ ALLGUESSES;
 
-  document.getElementById('game-end').innerHTML = SCORE;
+  document.getElementById('game-end').innerHTML = `<div> Game Complete!<div><br> <div class = 'row'>You scored: `+SCORE+`</div> <div class = 'row'> <div class = "button">
+  <input type = "button" onClick = "location.href = 'personal-library'" class = "roundbutton" name = "return-library" value = "Return to library"></div> <div class = "button">
+  <input type = "button" onClick = "location.href = 'home'" class = "roundbutton" name = "return-home" value = "Return to homepage></div> </div>`;
 
 
   document.getElementById('all_guesses').innerHTML = ALLGUESSES;
 }
 
-window.onbeforeunload = function() {
-  document.cookie = "all_guesses = ; expires = 01 Jan 1900 00:00:00 UTC";
-
-  if(!(current == Terms.length)) {
-    return("Are you sure you want to leave before finishing the game?")
-  }
-  return undefined;
-}
 
 function score_update() {
   termScore *= 1.05 - (current * 0.05)
@@ -251,3 +251,14 @@ function score_update() {
   termScore = 0
   
 }
+
+
+window.onbeforeunload = function() {
+  if(!(current == Terms.length)) {
+    return("Are you sure you want to leave before finishing the game?")
+  }
+  return undefined;
+
+  document.cookie = "all_guesses = ; expires = 01 Jan 1900 00:00:00 UTC";
+}
+
