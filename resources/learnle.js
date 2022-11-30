@@ -298,9 +298,9 @@ window.onbeforeunload = function() {
   if(!(current == Terms.length)) {
     return("Are you sure you want to leave before finishing the game?")
   }
-  return undefined;
-
   //Cookie is deleted
   document.cookie = "all_guesses = ; expires = 01 Jan 1900 00:00:00 UTC";
+  return undefined;
+
 }
 
