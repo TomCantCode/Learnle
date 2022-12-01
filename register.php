@@ -41,6 +41,15 @@
       $errors = true;
     }
 
+    //Fetches any duplicate usernames
+    $QUERYREAD = "SELECT * FROM acctbl WHERE AccName = '$USERNAME'";
+    $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+
+    if(mysqli_num_rows($SQLREAD) > 0) {
+      $output = "Username is already in use";
+      $errors = true;
+    }
+
     //If no errors have occured the variables are set to the database and session variables
     if($errors == false) {
       $PASSWORD = $PASSWORD;//Hashing here
