@@ -69,8 +69,6 @@ window.onbeforeunload = function() {
   if(!SAVED) {
     return("Are you sure you want to leave before finishing the game?")
   }  
-  //Cookie is deleted
-  document.cookie = "term_count_uid = ; expires = 01 Jan 1900 00:00:00 UTC";
   return undefined;
 
 }

@@ -9,6 +9,10 @@
 
     unset($output_sets);
     unset($output_classes);
+    
+    //Cookies are deleted
+    setcookie("term_count_uid", "", time() - 3600);
+    setcookie("all_guesses", "", time() - 3600);
   
     //Checks if user is signed in, else sent to login page
     if(!isset($_SESSION["username"])) {

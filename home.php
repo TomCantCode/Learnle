@@ -8,6 +8,11 @@
     $_SESSION["setID"] = 1;
     header('Location: game');
   }
+
+  
+  //Cookies are deleted
+  setcookie("term_count_uid", "", time() - 3600);
+  setcookie("all_guesses", "", time() - 3600);
 ?>
 
 <!DOCTYPE html>
