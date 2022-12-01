@@ -270,7 +270,9 @@ function gameEnd() {
   document.cookie=`all_guesses=`+ ALLGUESSES;
 
   //Game over screen pops up and displays score and links to home or library
-  document.getElementById('game-end').innerHTML = `<div> Game Complete!<div><br> <div class = 'row'>You scored: `+SCORE+`</div> <div class = 'row'> <div class = "button">
+  var gameover = document.getElementById('game-end')
+  gameover.style.display = "block";
+  gameover.innerHTML = `<div> Game Complete!<div><br> <div class = 'row'>You scored: `+SCORE+`</div> <div class = 'row'> <div class = "button">
   <input type = "button" onClick = "location.href = 'personal-library'" class = "roundbutton" name = "return-library" value = "Return to library"></div> <div class = "button">
   <input type = "button" onClick = "location.href = 'home'" class = "roundbutton" name = "return-home" value = "Return to homepage></div> </div>`;
 
