@@ -6,13 +6,20 @@
   //If play game button has been pressed, change page to the game and set the game ID
   if(isset($_POST["example-game"])) {
     $_SESSION["setID"] = 1;
-    header('Location: game');
+    header("Location: game");
   }
 
   
   //Cookies are deleted
   setcookie("term_count_uid", "", time() - 3600);
   setcookie("all_guesses", "", time() - 3600);
+
+  //If searchbar haas been entered
+  if(isset($_GET["Searchbar"])){
+    $_SESSION["search"] = $_GET["Searchbar"];
+    header("Location: search-result");
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +50,9 @@
     </div>
 
     <div class = "menumiddle">
-      <input type = "search" placeholder = "Search for a set" class = "searchbar">
+      <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar">
+      <form>
     </div>
   
     <div class = "menuright">
