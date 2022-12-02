@@ -20,6 +20,12 @@
         header('Location: login');
     }
 
+    //If searchbar has been entered
+    if(isset($_GET["Searchbar"])){
+      $_SESSION["search"] = $_GET["Searchbar"];
+      header("Location: search-result");
+    }
+
     //Gets all the sets the user has created from the database
     $ACCID = $_SESSION["ID"];
     $QUERYREAD = "SELECT SetID, SetName, Tags FROM settbl WHERE AccID = '$ACCID' ORDER BY SetName"; 
@@ -82,7 +88,9 @@
     </div>
 
     <div class = "menumiddle">
-      <input type = "search" placeholder = "Search for a set" class = "searchbar">
+      <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar">
+      <form>
     </div>
   
     <div class = "menuright">

@@ -13,11 +13,11 @@
   setcookie("all_guesses", "", time() - 3600);
 
   //If there is no search query, sent to homepage
-  if(!isset($_SESSION["search"])) {
+  if(!isset($_SESSION["search"]) /*or strlen(trim($_SESSION["search"])) == 0*/) {
     header("Location : home");
   }
 
-  //If searchbar haas been entered
+  //If searchbar has been entered
   if(isset($_GET["Searchbar"])){
     $_SESSION["search"] = $_GET["Searchbar"];
     header("Location: search-result");
@@ -25,12 +25,13 @@
 
   //Checks if search query is surrounded by '' marks, meaning they are searching by tags
   $SEARCH = $_SESSION["search"];
-  if($SEARCH AND $SEARCH) {
+  if(false) {
     $SEARCH;
   }
   //Else the search query is treated as a string
   else {
-    $QUERYREAD = "SELECT SetID, SetName, Tags FROM settbl WHERE SetName = '$SEARCH' ORDER BY SetName"; 
+
+    $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE SetName LIKE '$SEARCH%'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
     $columns = mysqli_num_rows($SQLREAD);
 
@@ -43,24 +44,33 @@
         $output = '';
         $SETIDS = array();
         $SETNAMES = array();
+        $CREATORS = array();
         $SETTAGS = array();
 
         for($x = 1; $x <= $columns; $x++){
+
             $ROW = mysqli_fetch_array($SQLREAD);
             $SETIDS[$x] = $ROW["SetID"];
             $SETNAMES[$x] = $ROW["SetName"];
             $SETTAGS[$x] = $ROW["Tags"];
+
+
+            $ACCID = $ROW["AccID"];
+            $QUERYREAD1 = "SELECT AccName FROM acctbl WHERE AccID = $ACCID"; 
+            $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
+            $ROW1 = mysqli_fetch_array($SQLREAD1);
+            $CREATORS[$x] = $ROW1["AccName"];
         }
     }
 
     //If any of the play game buttons have been pressed, change page to the game and set the game ID
     for($y = 1; $y <= $columns; $y++){
 
-        if(isset($_POST["play-".$y])) {
-            echo $SETIDS[$y];
-            $_SESSION["setID"] = $SETIDS[$y];
-            header('Location: game');
-        }
+      if(isset($_POST["play-".$y])) {
+          echo $SETIDS[$y];
+          $_SESSION["setID"] = $SETIDS[$y];
+          header('Location: game');
+      }
     }
 
   }
@@ -140,8 +150,8 @@
   
   <div class = "largeboard">
     
-     <h2>Results for '<?php $SEARCH?>':</h2>
-     <p><?php $columns?> results</p>
+     <h2>Results for '<?php echo $SEARCH?>':</h2>
+     <p><?php if($columns == 1){echo $columns.' result:';} else if($columns > 0){echo $columns.' results:';}?></p>
 
 
      <?php if(isset($output)) {echo $output;} ?>
@@ -152,7 +162,8 @@
         for($a = 1; $a <= $columns; $a++){
             echo '
             <div class = "set">
-                <div>'.$SETNAMES[$a].'</div><br>
+                <div>'.$SETNAMES[$a].'</div>
+                <div>By '.$CREATORS[$a].'</div><br>
                 <div class = "row">
                   <div>'.$SETTAGS[$a].'</div>
                   <form method = "POST" action = "'. $_SERVER["PHP_SELF"] .'"">
