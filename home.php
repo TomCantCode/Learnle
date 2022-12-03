@@ -51,7 +51,7 @@
 
     <div class = "menumiddle">
       <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
-        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar">
+        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "">
       <form>
     </div>
   

@@ -25,15 +25,67 @@
 
   //Checks if search query is surrounded by '' marks, meaning they are searching by tags
   $SEARCH = $_SESSION["search"];
-  if(false) {
-    $SEARCH;
+  $TAGS = $SEARCH;
+  $TAG_LIST = array();
+  if(str_starts_with($TAGS, '\'') and str_ends_with($TAGS, '\'')) {
+    //Search query is converted into seperate tag searches
+    $TAGCOUNT = floor(substr_count($TAGS, '\'') / 2);
+    echo $TAGCOUNT;
+    for($w = 0; $w < $TAGCOUNT; $w++){
+      echo '<br>'.$w;
+      $start = strpos($TAGS, '\'');
+      $end = strpos($TAGS, '\'', $start + 1);
+      $length = $end - $start;
+      ${"TAG-$w"} = substr($TAGS, $start, $length);
+      ${"TAG-$w"} = str_replace('\'', '', ${"TAG-$w"});
+      echo ${"TAG-$w"};
+      array_push($TAG_LIST, ${"TAG-$w"});
+      //Removes seperated tag from the remaining search query
+      $TAGS = str_replace('\''.${"TAG-$w"}.'\'', '', $TAGS);
+      
+    }
+
+    $TAG_STRING = implode(',',$TAG_LIST);
+    for($z = 0; $z < $w; $z++){
+      $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE Tags IN '($TAG_STRING)'";
+      $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+      $columns = mysqli_num_rows($SQLREAD);
+
+      //If user has no sets then a message will display
+      if($columns == 0) {
+        $output = "No results for $TAG_STRING";
+      }
+      //Puts all the set data into arrays
+      else {
+          $output = '';
+          $SETIDS = array();
+          $SETNAMES = array();
+          $CREATORS = array();
+          $SETTAGS = array();
+
+          for($x = 1; ($x) <= $columns; $x++){
+              echo $x;
+              $ROW = mysqli_fetch_array($SQLREAD);
+              $SETIDS[$x] = $ROW["SetID"];
+              $SETNAMES[$x] = $ROW["SetName"];
+              $SETTAGS[$x] = $ROW["Tags"];
+
+              //Fetches the username of the set creator
+              $ACCID = $ROW["AccID"];
+              $QUERYREAD1 = "SELECT AccName FROM acctbl WHERE AccID = $ACCID"; 
+              $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
+              $ROW1 = mysqli_fetch_array($SQLREAD1);
+              $CREATORS[$x] = $ROW1["AccName"];
+        }
+      }
+    }
   }
   //Else the search query is treated as a string
   else {
-
     $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE SetName LIKE '$SEARCH%'";
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
     $columns = mysqli_num_rows($SQLREAD);
+  
 
     //If user has no sets then a message will display
     if($columns == 0) {
@@ -55,24 +107,24 @@
             $SETTAGS[$x] = $ROW["Tags"];
 
 
+            //Fetches the username of the set creator
             $ACCID = $ROW["AccID"];
             $QUERYREAD1 = "SELECT AccName FROM acctbl WHERE AccID = $ACCID"; 
             $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
             $ROW1 = mysqli_fetch_array($SQLREAD1);
             $CREATORS[$x] = $ROW1["AccName"];
-        }
-    }
-
-    //If any of the play game buttons have been pressed, change page to the game and set the game ID
-    for($y = 1; $y <= $columns; $y++){
-
-      if(isset($_POST["play-".$y])) {
-          echo $SETIDS[$y];
-          $_SESSION["setID"] = $SETIDS[$y];
-          header('Location: game');
       }
     }
+  }
 
+  //If any of the play game buttons have been pressed, change page to the game and set the game ID
+  for($y = 1; $y <= $columns; $y++){
+
+    if(isset($_POST["play-".$y])) {
+        echo $SETIDS[$y];
+        $_SESSION["setID"] = $SETIDS[$y];
+        header('Location: game');
+    }
   }
 
 ?>
@@ -150,7 +202,7 @@
   
   <div class = "largeboard">
     
-     <h2>Results for '<?php echo $SEARCH?>':</h2>
+     <h2>Results for <?php echo $SEARCH?>:</h2>
      <p><?php if($columns == 1){echo $columns.' result:';} else if($columns > 0){echo $columns.' results:';}?></p>
 
 
