@@ -7,6 +7,7 @@
   if(isset($_POST["example-game"])) {
     $_SESSION["setID"] = 1;
     header("Location: game");
+    exit();
   }
 
   
@@ -18,7 +19,10 @@
   if(isset($_GET["Searchbar"])){
     $_SESSION["search"] = $_GET["Searchbar"];
     header("Location: search-result");
+    exit();
   }
+
+  $_SESSION["search"] = null;
 
 ?>
 
@@ -52,7 +56,7 @@
     <div class = "menumiddle">
       <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
         <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "">
-      <form>
+      </form>
     </div>
   
     <div class = "menuright">

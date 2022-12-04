@@ -16,14 +16,16 @@
   
     //Checks if user is signed in, else sent to login page
     if(!isset($_SESSION["username"])) {
-        $_SESSION["destination"] = str_replace(".php","",$_SERVER['SCRIPT_NAME']);
-        header('Location: login');
+      $_SESSION["destination"] = str_replace(".php","",$_SERVER['SCRIPT_NAME']);
+      header('Location: login');
+      exit();
     }
 
     //If searchbar has been entered
     if(isset($_GET["Searchbar"])){
       $_SESSION["search"] = $_GET["Searchbar"];
       header("Location: search-result");
+      exit();
     }
 
     //Gets all the sets the user has created from the database
@@ -47,7 +49,7 @@
             $ROW = mysqli_fetch_array($SQLREAD);
             $SETIDS_U[$x] = $ROW["SetID"];
             $SETNAMES_U[$x] = $ROW["SetName"];
-            $SETTAGS_U[$x] = $ROW["Tags"];
+            $SETTAGS_U[$x] = ucwords($ROW["Tags"]);
         }
 
     }
@@ -60,8 +62,11 @@
           echo $SETIDS_U[$y];
           $_SESSION["setID"] = $SETIDS_U[$y];
           header('Location: game');
+          exit();
       }
     }
+
+  $_SESSION["search"] = null;
 
 ?>
 
@@ -90,7 +95,7 @@
     <div class = "menumiddle">
       <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
         <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar">
-      <form>
+      </form>
     </div>
   
     <div class = "menuright">

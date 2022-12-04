@@ -75,7 +75,7 @@
           $ROW = mysqli_fetch_array($SQLREAD1);
           $SETIDS[$x] = $ROW["SetID"];
           $SETNAMES[$x] = $ROW["SetName"];
-          $SETTAGS[$x] = $ROW["Tags"];
+          $SETTAGS_U[$x] = ucwords($ROW["Tags"]);
 
           //Fetches the username of the set creator
           $ACCID = $ROW["AccID"];
@@ -179,7 +179,7 @@
     <div class = "menumiddle">
       <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
         <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "<?php echo $searchbar_val?>">
-      <form>
+      </form>
     </div>
   
     <div class = "menuright">
