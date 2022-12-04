@@ -27,12 +27,11 @@
   $SEARCH = $_SESSION["search"];
   $TAGS = $SEARCH;
   $TAG_LIST = array();
+
   if(str_starts_with($TAGS, '\'') and str_ends_with($TAGS, '\'')) {
     //Search query is converted into seperate tag searches
     $TAGCOUNT = floor(substr_count($TAGS, '\'') / 2);
-    echo $TAGCOUNT;
     for($w = 0; $w < $TAGCOUNT; $w++){
-      echo '<br>'.$w;
       $start = strpos($TAGS, '\'');
       $end = strpos($TAGS, '\'', $start + 1);
       $length = $end - $start + 1;
@@ -40,45 +39,54 @@
       //Removes seperated tag from the remaining search query
       $TAGS = str_replace(${"TAG-$w"}, '', $TAGS);
       ${"TAG-$w"} = strval(${"TAG-$w"});
-      echo ${"TAG-$w"};
       array_push($TAG_LIST, ${"TAG-$w"});
       
     }
 
-    $TAG_STRING = implode(',',$TAG_LIST);
-    for($z = 0; $z < $w; $z++){
-      $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE Tags IN ($TAG_STRING)";
-      $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
-      $columns = mysqli_num_rows($SQLREAD);
+    $TAG_STRING = implode(', ',$TAG_LIST);
 
-      //If user has no sets then a message will display
-      if($columns == 0) {
-        $output = "No results for $TAG_STRING";
-      }
-      //Puts all the set data into arrays
-      else {
-          $output = '';
-          $SETIDS = array();
-          $SETNAMES = array();
-          $CREATORS = array();
-          $SETTAGS = array();
+    //Gets the set by tags from tag table
+    $QUERYREAD = "SELECT SetID FROM tagtbl WHERE Tag IN ($TAG_STRING)";
+    $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
+    $columns_tags = mysqli_num_rows($SQLREAD);
 
-          for($x = 1; ($x) <= $columns; $x++){
-              echo $x;
-              $ROW = mysqli_fetch_array($SQLREAD);
-              $SETIDS[$x] = $ROW["SetID"];
-              $SETNAMES[$x] = $ROW["SetName"];
-              $SETTAGS[$x] = $ROW["Tags"];
+    //If user has no sets then a message will display
+    if($columns_tags == 0) {
+      $output = "No results for $TAG_STRING";
+    }
+    //Puts all the set data into arrays
+    else {
+      $output = '';
+      $SETIDS = array();
+      $SETNAMES = array();
+      $CREATORS = array();
+      $SETTAGS = array();
 
-              //Fetches the username of the set creator
-              $ACCID = $ROW["AccID"];
-              $QUERYREAD1 = "SELECT AccName FROM acctbl WHERE AccID = $ACCID"; 
-              $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
-              $ROW1 = mysqli_fetch_array($SQLREAD1);
-              $CREATORS[$x] = $ROW1["AccName"];
+      for($q = 1; $q <= $columns_tags; $q++) {
+        $ROW = mysqli_fetch_array($SQLREAD);
+        $SETID = $ROW["SetID"];
+      
+
+        $QUERYREAD1 = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE SetID = $SETID";
+        $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
+        $columns = mysqli_num_rows($SQLREAD1);
+
+        for($x = $q; $x < ($columns + $q); $x++){
+          $ROW = mysqli_fetch_array($SQLREAD1);
+          $SETIDS[$x] = $ROW["SetID"];
+          $SETNAMES[$x] = $ROW["SetName"];
+          $SETTAGS[$x] = $ROW["Tags"];
+
+          //Fetches the username of the set creator
+          $ACCID = $ROW["AccID"];
+          $QUERYREAD2 = "SELECT AccName FROM acctbl WHERE AccID = $ACCID"; 
+          $SQLREAD2 = mysqli_query($CONNECT, $QUERYREAD2);
+          $ROW2 = mysqli_fetch_array($SQLREAD2);
+          $CREATORS[$x] = $ROW2["AccName"];
         }
       }
     }
+
   }
   //Else the search query is treated as a string
   else {
@@ -113,20 +121,32 @@
             $SQLREAD1 = mysqli_query($CONNECT, $QUERYREAD1);
             $ROW1 = mysqli_fetch_array($SQLREAD1);
             $CREATORS[$x] = $ROW1["AccName"];
-      }
+        }
     }
   }
 
   //If any of the play game buttons have been pressed, change page to the game and set the game ID
-  for($y = 1; $y <= $columns; $y++){
+  if(isset($columns)) {
+    for($y = 1; $y <= $columns; $y++){
 
-    if(isset($_POST["play-".$y])) {
-        echo $SETIDS[$y];
-        $_SESSION["setID"] = $SETIDS[$y];
-        header('Location: game');
+      if(isset($_POST["play-".$y])) {
+          echo $SETIDS[$y];
+          $_SESSION["setID"] = $SETIDS[$y];
+          header('Location: game');
+      }
     }
   }
 
+  //So searchbar doesn't immediatley clear
+  if($SEARCH != null) {
+    $searchbar_val = $SEARCH;
+  }
+  elseif(isset($TAG_STRING)) {
+    $searchbar_val =  $TAG_STRING;
+  }
+  else {
+    $searchbar_val =  '';
+  }
 ?>
 
 <!DOCTYPE html>
@@ -158,7 +178,7 @@
 
     <div class = "menumiddle">
       <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
-        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar">
+        <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "<?php echo $searchbar_val?>">
       <form>
     </div>
   
@@ -203,15 +223,32 @@
   <div class = "largeboard">
     
      <h2>Results for <?php echo $SEARCH?>:</h2>
-     <p><?php if($columns == 1){echo $columns.' result:';} else if($columns > 0){echo $columns.' results:';}?></p>
+     <p>
+      <?php
+        //Depending which method was used
+        if(isset($columns_tags)) {
+          $TIMES = $columns_tags;
+        }
+        else{
+          $TIMES = $columns;
+        } 
+        //Grammar
+        if($TIMES == 1){
+          echo $TIMES.' result:';
+        } 
+        else if($TIMES > 0 or $TIMES == 0){
+          echo $TIMES.' results:';
+        }
+      ?>
+    </p>
 
 
      <?php if(isset($output)) {echo $output;} ?>
 
      <?php
-        //Display sets
 
-        for($a = 1; $a <= $columns; $a++){
+        //Display sets  
+        for($a = 1; $a <= $TIMES; $a++){
             echo '
             <div class = "set">
                 <div>'.$SETNAMES[$a].'</div>
