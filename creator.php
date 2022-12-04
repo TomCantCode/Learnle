@@ -21,6 +21,9 @@
     $TAG1 = strtolower($_POST["tag1"]);
     $TAG2 = strtolower($_POST["tag2"]);
     $TAG3 = strtolower($_POST["tag3"]);
+    $TAGS = array($TAG1,$TAG2,$TAG3);
+    $TAGS = array_filter($TAGS);
+    $TAGS = implode(", ",$TAGS);
     $KEYBOARDTYPE = $_POST["keyboard"];
 
     //Gets values for term variables from form upon completion
@@ -100,7 +103,7 @@
     //If no errors have occured the set variables are set to the database
     if($errors == false) {
       $ACCID = $_SESSION["ID"];
-      $QUERYADD = "INSERT INTO settbl (SetName, AccID, KeyboardType) VALUES ('$SETNAME', '$ACCID', '$KEYBOARDTYPE')";
+      $QUERYADD = "INSERT INTO settbl (SetName, AccID, KeyboardType, Tags) VALUES ('$SETNAME', '$ACCID', '$KEYBOARDTYPE', '$TAGS')";
 
       if(mysqli_query($CONNECT, $QUERYADD)) {
         $output = "Set added!";
