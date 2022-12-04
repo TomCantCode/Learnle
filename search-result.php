@@ -35,19 +35,19 @@
       echo '<br>'.$w;
       $start = strpos($TAGS, '\'');
       $end = strpos($TAGS, '\'', $start + 1);
-      $length = $end - $start;
+      $length = $end - $start + 1;
       ${"TAG-$w"} = substr($TAGS, $start, $length);
-      ${"TAG-$w"} = str_replace('\'', '', ${"TAG-$w"});
+      //Removes seperated tag from the remaining search query
+      $TAGS = str_replace(${"TAG-$w"}, '', $TAGS);
+      ${"TAG-$w"} = strval(${"TAG-$w"});
       echo ${"TAG-$w"};
       array_push($TAG_LIST, ${"TAG-$w"});
-      //Removes seperated tag from the remaining search query
-      $TAGS = str_replace('\''.${"TAG-$w"}.'\'', '', $TAGS);
       
     }
 
     $TAG_STRING = implode(',',$TAG_LIST);
     for($z = 0; $z < $w; $z++){
-      $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE Tags IN '($TAG_STRING)'";
+      $QUERYREAD = "SELECT SetID, SetName, AccID, Tags FROM settbl WHERE Tags IN ($TAG_STRING)";
       $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
       $columns = mysqli_num_rows($SQLREAD);
 
