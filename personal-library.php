@@ -151,7 +151,7 @@
                   <div>'.$SETTAGS_U[$a].'</div>
                   <form method = "POST" action = "'. $_SERVER["PHP_SELF"] .'"">
                     <div class = "button">
-                      <input type = "submit" class = "roundbutton" name = "play-'.$a.'" id = "play" value = "Play">
+                      <input type = "submit" class = "roundbutton" name = "play-'.$a.'" id = "play" title = "Play this Set" value = "Play">
                     </div>
                   </form>
                 </div>

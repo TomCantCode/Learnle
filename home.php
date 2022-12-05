@@ -112,7 +112,7 @@
      <br>image<br>
      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
         <div class = "button">
-          <input type = "submit" class = "homebutton" name = "example-game" value = "Play example game">
+          <input type = "submit" class = "homebutton"  title = "Play this example Set"  name = "example-game" value = "Play example game">
         </div>
      </form>
      

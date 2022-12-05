@@ -316,7 +316,7 @@ pre{
     margin: 5px 10px 5px 0px;
     max-height: fit-content;
     max-width: 620px;
-    min-width: 200px;
+    min-width: fit-content;
     padding: 10px;
     position: relative;
     text-align: left;
@@ -402,6 +402,13 @@ pre{
     right: 10px;
     top: 32%;
     position: absolute;
+}
+
+#like{
+    right: 60px;
+    top: 32%;
+    position: absolute;
+    margin-right: 10px;
 }
 
 #save{
