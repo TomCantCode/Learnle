@@ -75,7 +75,7 @@
           $ROW = mysqli_fetch_array($SQLREAD1);
           $SETIDS[$x] = $ROW["SetID"];
           $SETNAMES[$x] = $ROW["SetName"];
-          $SETTAGS_U[$x] = ucwords($ROW["Tags"]);
+          $SETTAGS[$x] = ucwords($ROW["Tags"]);
 
           //Fetches the username of the set creator
           $ACCID = $ROW["AccID"];
@@ -112,7 +112,7 @@
             $ROW = mysqli_fetch_array($SQLREAD);
             $SETIDS[$x] = $ROW["SetID"];
             $SETNAMES[$x] = $ROW["SetName"];
-            $SETTAGS[$x] = $ROW["Tags"];
+            $SETTAGS[$x] = ucwords($ROW["Tags"]);;
 
 
             //Fetches the username of the set creator
