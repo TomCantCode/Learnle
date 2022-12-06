@@ -298,7 +298,7 @@
           $columns3 = mysqli_num_rows($SQLREAD3);
 
           //Save button only viable to user if signed in or if the set was created by the user
-          if(isset($_SESSION["loggedin"]) || ($SETIDS[$a] != $ROW["SetID"])){
+          if(isset($_SESSION["loggedin"]) and ($SETIDS[$a] != $ROW["SetID"])){
             $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "save-'.$a.'" id = "like" title = "Save to your personal library" value = "Save">';
           }
           else{
