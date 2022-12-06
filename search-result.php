@@ -136,6 +136,10 @@
     }
   }
 
+  if(isset($_SESSION["ID"])) {
+    $USERID = $_SESSION["ID"];
+  }
+
   //If any of the save game buttons have been pressed, added to personal library
   if(isset($columns)) {
     for($y = 1; $y <= $columns; $y++){
@@ -145,34 +149,38 @@
         //Variables are set
         $errors = 0;
         $SAVESET = $SETIDS[$y];
-        $USERID = $_SESSION["ID"];
         //var_dump($SETIDS);
-        //echo $SETIDS[$y];
+        //echo $SETIDS[$y].'<br>';
 
         //Checks to see if user has already saved this set
         $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE AccID = '$USERID'";
         $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
-        $ROW = mysqli_fetch_assoc($SQLREAD3);
         $columns3 = mysqli_num_rows($SQLREAD3);
 
         for($r = 1; $r <= $columns3; $r++) {
+          $ROW = mysqli_fetch_assoc($SQLREAD3);
+          echo $r.': '.$ROW["SetID"].', '. $SAVESET.' error:'.($ROW["SetID"] == $SAVESET).'. <br>';
           if($ROW["SetID"] == $SAVESET){
             $errors += 1;
           }
         }
 
         //If there are no errors, adds Set to personal library table under user's ID
-        if($errors = 0){
+        if($errors == 0){
           $QUERYADD = "INSERT INTO personaltbl (AccID, SetID) VALUES ('$USERID', '$SAVESET')";
-          echo $USERID;
+          //echo $USERID;
           if(mysqli_query($CONNECT, $QUERYADD)) {
             echo '<script>alert("Set saved!")</script>';
           }
         }
         else{
           echo '<script>alert("Set has already been added")</script>';
+          //echo $errors;
         }
+
       }
+      
+      unset($_POST["save-".$y]);
     }
   }
 
@@ -291,15 +299,19 @@
 
 
           
-          //Checks to see if user has already saved this set
-          $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE AccID = '$USERID'";
-          $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
-          $ROW = mysqli_fetch_assoc($SQLREAD3);
-          $columns3 = mysqli_num_rows($SQLREAD3);
-
           //Save button only viable to user if signed in or if the set was created by the user
-          if(isset($_SESSION["loggedin"]) and ($SETIDS[$a] != $ROW["SetID"])){
-            $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "save-'.$a.'" id = "like" title = "Save to your personal library" value = "Save">';
+          if(isset($_SESSION["loggedin"])){
+
+            //Checks to see if user has already saved this set
+            $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE AccID = '$USERID'";
+            $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
+            $ROW = mysqli_fetch_assoc($SQLREAD3);
+            $columns3 = mysqli_num_rows($SQLREAD3);
+
+            if($SETIDS[$a] != $ROW["SetID"]){
+              echo
+              $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "save-'.$a.'" id = "like" title = "Save to your personal library" value = "Save">';
+            }
           }
           else{
             $SAVEBUTTON = '';
@@ -319,6 +331,8 @@
                 </form>
               </div>
           </div>';
+
+          $SAVEBUTTON = '';
         }
      ?>
     
