@@ -54,7 +54,7 @@
     </div>
 
     <div class = "menumiddle">
-      <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+      <form method= "GET" action = "<?php echo str_replace(".php","",$_SERVER["PHP_SELF"]) ?>">
         <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "">
       </form>
     </div>
@@ -110,7 +110,7 @@
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
      <br>image<br>
-     <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+     <form method = "POST" action = "<?php echo str_replace(".php","",$_SERVER["PHP_SELF"]) ?>">
         <div class = "button">
           <input type = "submit" class = "homebutton"  title = "Play this example Set"  name = "example-game" value = "Play example game">
         </div>

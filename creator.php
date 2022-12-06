@@ -194,7 +194,7 @@
       Create a Set:
     </h2>
     
-      <form method = "POST" action = "<?php echo $_SERVER["PHP_SELF"] ?>" autocomplete="off">
+      <form method = "POST" action = "<?php echo str_replace(".php","",$_SERVER["PHP_SELF"]) ?>" autocomplete="off">
 
         <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp
         <div class = "button">

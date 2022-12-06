@@ -216,7 +216,7 @@
     </div>
 
     <div class = "menumiddle">
-      <form method= "GET" action = "<?php echo $_SERVER["PHP_SELF"] ?>">
+      <form method= "GET" action = "<?php echo str_replace(".php","",$_SERVER["PHP_SELF"]) ?>">
         <input type = "search" placeholder = "Search for a set" class = "searchbar" name = "Searchbar" value = "<?php echo $searchbar_val?>">
       </form>
     </div>
@@ -311,7 +311,7 @@
               <div>By '.$CREATORS[$a].'</div><br>
               <div class = "row">
                 <div>'.$SETTAGS[$a].'</div>
-                <form method = "POST" action = "'. $_SERVER["PHP_SELF"] .'">
+                <form method = "POST" action = "'. str_replace(".php","",$_SERVER["PHP_SELF"]) .'">
                   <div class = "button">
                     <input type = "submit" class = "roundbutton" name = "play-'.$a.'" id = "play" title = "Play this Set" value = "Play">
                   '.$SAVEBUTTON.'
