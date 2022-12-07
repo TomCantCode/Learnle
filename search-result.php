@@ -343,6 +343,16 @@
             else{
               $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "unsave-'.$a.'" id = "like" title = "Remove from your personal library" value = "Remove">';
             }
+
+            //Checks to see if user is the set creator (and doesn't need to save the set)
+            $QUERYREAD3 = "SELECT AccID, SetID FROM settbl WHERE (AccID = '$USERID') and (SetID = '$SETIDS[$a]')";
+            $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
+            $columns3 = mysqli_num_rows($SQLREAD3);
+
+            //Over zero columns means the user is the set owner/creator
+            if($columns3 > 0){
+              $SAVEBUTTON = '';
+            }
           }
           else{
             $SAVEBUTTON = '';
