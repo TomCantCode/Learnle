@@ -1,3 +1,4 @@
+<?php header('Location: home');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,5 +9,6 @@
 </head>
 <body>
     <a href="./register.php">Some text inside so you can click on it</a>
+    
 </body>
 </html>
