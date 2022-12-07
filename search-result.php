@@ -140,11 +140,11 @@
     $USERID = $_SESSION["ID"];
   }
 
-  //If any of the save game buttons have been pressed, added to personal library
+  //If any of the save/unsave game buttons have been pressed, added/removed to personal library
   if(isset($columns)) {
     for($y = 1; $y <= $columns; $y++){
       
-      //If user pressed the button
+      //If user pressed the save button
       if(isset($_POST["save-".$y])){
         //Variables are set
         $errors = 0;
@@ -153,16 +153,13 @@
         //echo $SETIDS[$y].'<br>';
 
         //Checks to see if user has already saved this set
-        $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE AccID = '$USERID'";
+        $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SAVESET')";
         $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
         $columns3 = mysqli_num_rows($SQLREAD3);
 
-        for($r = 1; $r <= $columns3; $r++) {
-          $ROW = mysqli_fetch_assoc($SQLREAD3);
-          echo $r.': '.$ROW["SetID"].', '. $SAVESET.' error:'.($ROW["SetID"] == $SAVESET).'. <br>';
-          if($ROW["SetID"] == $SAVESET){
-            $errors += 1;
-          }
+        //No columns means the user hasn't saved this set
+        if($columns3 > 0){
+          $errors += 1;
         }
 
         //If there are no errors, adds Set to personal library table under user's ID
@@ -171,6 +168,7 @@
           //echo $USERID;
           if(mysqli_query($CONNECT, $QUERYADD)) {
             echo '<script>alert("Set saved!")</script>';
+            unset($_POST["save-".$y]);
           }
         }
         else{
@@ -179,8 +177,39 @@
         }
 
       }
+
+      //If user pressed the unsave button
+      if(isset($_POST["unsave-".$y])){
+        //Variables are set
+        $errors = 0;
+        $SAVESET = $SETIDS[$y];
+
+        //Checks to see if user has already saved this set
+        $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SAVESET')";
+        $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
+        $columns3 = mysqli_num_rows($SQLREAD3);
+
+        //No columns means the user hasn't saved this set
+        if($columns3 == 0){
+          $errors += 1;
+        }
+
+        //If there are no errors, adds Set to personal library table under user's ID
+        if($errors == 0){
+          $QUERYADD = "DELETE FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SETIDS[$y]')";
+          //echo $USERID;
+          if(mysqli_query($CONNECT, $QUERYADD)) {
+            echo '<script>alert("Set removed!")</script>';
+            unset($_POST["unsave-".$y]);
+          }
+        }
+        else{
+          echo '<script>alert("Set isn\'t added")</script>';
+          //echo $errors;
+        }
+
+      }
       
-      unset($_POST["save-".$y]);
     }
   }
 
@@ -303,14 +332,16 @@
           if(isset($_SESSION["loggedin"])){
 
             //Checks to see if user has already saved this set
-            $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE AccID = '$USERID'";
+            $QUERYREAD3 = "SELECT AccID, SetID FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SETIDS[$a]')";
             $SQLREAD3 = mysqli_query($CONNECT, $QUERYREAD3);
-            $ROW = mysqli_fetch_assoc($SQLREAD3);
             $columns3 = mysqli_num_rows($SQLREAD3);
 
-            if($SETIDS[$a] != $ROW["SetID"]){
-              echo
+            //No columns means the user hasn't saved this set
+            if($columns3 == 0){
               $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "save-'.$a.'" id = "like" title = "Save to your personal library" value = "Save">';
+            }
+            else{
+              $SAVEBUTTON = '<input type = "submit" class = "roundbutton" name = "unsave-'.$a.'" id = "like" title = "Remove from your personal library" value = "Remove">';
             }
           }
           else{
