@@ -196,9 +196,9 @@
 
         //If there are no errors, adds Set to personal library table under user's ID
         if($errors == 0){
-          $QUERYADD = "DELETE FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SETIDS[$y]')";
+          $QUERYDEL = "DELETE FROM personaltbl WHERE (AccID = '$USERID') and (SetID = '$SETIDS[$y]')";
           //echo $USERID;
-          if(mysqli_query($CONNECT, $QUERYADD)) {
+          if(mysqli_query($CONNECT, $QUERYDEL)) {
             echo '<script>alert("Set removed!")</script>';
             unset($_POST["unsave-".$y]);
           }
