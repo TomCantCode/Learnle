@@ -102,7 +102,7 @@
 
 <body>
 
-  <div class = "largeboard">
+  <div class = "board largeboard">
     
     <h2>
       Sign In:

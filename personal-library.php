@@ -227,7 +227,7 @@
   
   <div class = "groupboard">
     
-    <div class = "halfboard">
+    <div class = "board halfboard">
      <h2>Your Sets:</h2>
      <p>Sets you make or save will appear here</p>
 
@@ -285,7 +285,7 @@
      ?>
     </div>
 
-    <div class = "halfboard">
+    <div class = "board halfboard">
      <h2>Your Classes:</h2>
      <p>Classes you join will appear here</p>
 

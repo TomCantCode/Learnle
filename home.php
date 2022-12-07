@@ -99,7 +99,7 @@
   
   <div class = "groupboard">
     
-    <div class = "homeboard">
+    <div class = "board homeboard">
      <h2>Welcome</h2>
      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sapien neque, varius quis convallis id,
         ullamcorper id ante. Morbi aliquet pharetra enim vitae gravida. Etiam venenatis placerat enim quis
@@ -120,7 +120,7 @@
 
     
 
-    <div class = "homeboard">
+    <div class = "board homeboard">
      <h2>Make Set</h2>
      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sapien neque, varius quis convallis id,
         ullamcorper id ante. Morbi aliquet pharetra enim vitae gravida. Etiam venenatis placerat enim quis
@@ -137,7 +137,7 @@
 
     </div>
 
-    <div class = "homeboard">
+    <div class = "board homeboard">
      <h2>Join Others</h2>
      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sapien neque, varius quis convallis id,
         ullamcorper id ante. Morbi aliquet pharetra enim vitae gravida. Etiam venenatis placerat enim quis

@@ -296,7 +296,7 @@
 
 <body>
   
-  <div class = "largeboard">
+  <div class = "board largeboard">
     
      <h2>Results for <?php echo $SEARCH?>:</h2>
      <p>

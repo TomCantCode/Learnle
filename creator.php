@@ -188,7 +188,7 @@
 
 <body>
 
-  <div class = "largeboard">
+  <div class = "board largeboard">
     
     <h2>
       Create a Set:
