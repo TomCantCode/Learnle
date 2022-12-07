@@ -228,26 +228,45 @@ pre{
     margin: 0px;
 }
 
-#game-end {
-    display: none;
+.modal{
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.alertbox{
     background-color: var(--fadebg);
-    height: 200px;
+    height: fit-content;
     width: fit-content;
     padding: 20px;
     border-radius: 5px;
     border: 4px solid var(--accent2);
 
-    top: 50%;
+    top: 0%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 30%);
     position: absolute;
     z-index: 3;
+}
+
+.alertbox:hover{
+    cursor: pointer;
+}
+
+.alertbox:modal{
+    display: none;
 }
 
 .board{
     box-sizing: border-box;
     margin: 0px 50px 50px;
     padding: 10px;
+    min-width: fit-content;
     
     position: relative;
     text-align: left;

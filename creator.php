@@ -188,6 +188,57 @@
 
 <body>
 
+  <?php
+  $alert = 'Popup';
+  if(isset($alert)){
+    $alert_status = 'block';
+  }
+  else{
+    ob_start();
+    $alert_status = 'none';
+    ob_end_clean();
+  }
+  ?>
+
+
+  <style>
+  .modal {
+    display: <?php echo $alert_status?>;
+  }
+  </style>
+
+  <div id="popup" class="modal">
+
+    <div class="alertbox">
+      <div class="text">
+        <?php if(isset($alert)) {echo $alert;}?>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    //Set variables
+    var modal = document.getElementById("popup");
+    var box = document.getElementsByClassName("alertbox")[0];
+
+    //Close the pop-up if the user clicks it
+    box.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    //Close the pop-up if the user clicks the screen anywhere
+    window.onclick = function(event) {
+      if((event.target == modal) || (event.target == box)) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+
+
+
+
   <div class = "board largeboard">
     
     <h2>
