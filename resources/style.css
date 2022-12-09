@@ -305,6 +305,8 @@ pre{
     background-position: left bottom;
 }
 
+
+
 @media screen and (max-width: 565px) {
     .largeboard{
       padding: 10px 20px;
