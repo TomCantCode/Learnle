@@ -6,7 +6,11 @@
   $CONNECT;
 
   session_start();
-  unset($output);
+  unset($alert);
+  $DESTINATION = '';
+
+  echo '<script type="text/JavaScript">var leave = false
+      </script>';
 
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
@@ -21,14 +25,14 @@
     $errors = false;
 
     if($PASSWORD != $CPASSWORD) {
-      $output = "Passwords do not match";
+      $alert = "Passwords do not match";
       $errors = true;
     }
 
     $TODAY = date("Y-m-d");
 
     if($DOB >= $TODAY) {
-      $output = "Date of Birth is invalid";
+      $alert = "Date of Birth is invalid";
       $errors = true;
     }
 
@@ -37,7 +41,7 @@
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
 
     if(mysqli_num_rows($SQLREAD) > 0) {
-      $output = "Email is already in use";
+      $alert = "Email is already in use";
       $errors = true;
     }
 
@@ -46,7 +50,7 @@
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
 
     if(mysqli_num_rows($SQLREAD) > 0) {
-      $output = "Username is already in use";
+      $alert = "Username is already in use";
       $errors = true;
     }
 
@@ -56,7 +60,7 @@
       $QUERYADD = "INSERT INTO acctbl (AccName, Email, DOB, AccType, Password) VALUES ('$USERNAME', '$EMAIL', '$DOB', '$ACCTYPE', '$PASSWORD')";
 
       if(mysqli_query($CONNECT, $QUERYADD)) {
-        $output = "Account added!";
+        $alert = "Account added!";
       }
 
       $QUERYREAD = "SELECT AccID, AccType FROM acctbl WHERE Email = '$EMAIL'";
@@ -68,22 +72,17 @@
       $_SESSION["type"] = $ROW["AccType"];
       $_SESSION["loggedin"] = TRUE;
 
-     //Sent to homepage/orignal destination
-     if(!isset($_SESSION["destination"])) {
-      $DESTINATION = "home";
-     }
-     else {
-      $DESTINATION = $_SESSION["destination"];
-     }
+      //Sent to homepage/orignal destination
+      if(!isset($_SESSION["destination"])) {
+        $DESTINATION = "home";
+      }
+      else {
+        $DESTINATION = $_SESSION["destination"];
+      }
 
-     echo '<script type="text/JavaScript"> 
-     alert("Signed In!");
-     window.location.href = "' . $DESTINATION . '";
-     </script>';
-     $_SESSION["destination"] = null;
-
-
-    }
+      echo '<script type="text/JavaScript">leave = true
+      </script>';
+      }
 
   }
   
@@ -121,6 +120,60 @@
 
 <body>
 
+  <?php
+    //$alert = 'Popup';
+    if(isset($alert)){
+      $alert_status = 'block';
+    }
+    else{
+      ob_start();
+      $alert_status = 'none';
+      ob_end_clean();
+    }
+  ?>
+
+
+  <style>
+    .modal {
+      display: <?php echo $alert_status?>;
+    }
+  </style>
+
+  <div id="popup" class="modal">
+
+    <div class="alertbox">
+      <div class="text">
+        <?php if(isset($alert)) {echo $alert;}?>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    //Set variables
+    var modal = document.getElementById("popup");
+    var box = document.getElementsByClassName("alertbox")[0];
+
+    //Close the pop-up if the user clicks it
+    box.onclick = function() {
+      modal.style.display = "none";
+      if(leave == true){
+        window.location.href = "<?php echo $DESTINATION?>";
+      }
+    }
+
+    //Close the pop-up if the user clicks the screen anywhere
+    window.onclick = function(event) {
+      if((event.target == modal) || (event.target == box)) {
+        modal.style.display = "none";
+        if(leave == true){
+          window.location.href = "<?php echo $DESTINATION?>";
+        }
+      }
+    }
+  </script>
+
+
   <div class = "board largeboard">
     
     <h2>
@@ -141,7 +194,6 @@
         Confirm Password:   <input type= "password" id= "cpassword" name= "cpassword" required><br><br>
         <div class = "button"><input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm"></div>   <div class = "button"><input type= "reset" class = "smallbutton" required></div>
 
-        <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
     </pre>
       
