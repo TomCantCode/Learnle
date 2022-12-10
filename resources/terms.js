@@ -1,7 +1,6 @@
 //Global variables and cookie
 var TERMNUM = 1;
 document.cookie=`term_count_uid=`+TERMNUM;
-var SAVED = false   
 
 
 //Adding a term to the list

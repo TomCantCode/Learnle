@@ -6,7 +6,12 @@
   $CONNECT;
 
   session_start();
-  unset($output);
+  unset($alert);
+  echo '<script src = "resources/terms.js"></script>
+     <script type="text/JavaScript"> 
+     var SAVED = false;
+     </script>';
+   
 
   //Checks if user is signed in, else sent to login page
   if(!isset($_SESSION["username"])) {
@@ -38,7 +43,7 @@
     //Checks each tag is a sensible length
     for($a = 1; $a < 3; $a++) {
       if(!(${"TAG".$a} < 20)) {
-        $output = "Length of tag is too large (Tag: $a)";
+        $alert = "Length of tag is too large (Tag: $a)";
         $errors = true;
       }
     }
@@ -51,13 +56,13 @@
     $SQLREAD = mysqli_query($CONNECT, $QUERYREAD);
 
     if(mysqli_num_rows($SQLREAD) > 0) {
-      $output = "Set name is already in use";
+      $alert = "Set name is already in use";
       $errors = true;
     }
 
     //Checks set title is only alphanumeric
     if(!preg_match("#^[a-zA-Z0-9 ]+$#", $SETNAME)) {
-      $output = "Set name doesn't contain just alphanumeric characters";
+      $alert = "Set name doesn't contain just alphanumeric characters";
       $errors = true;
     }
 
@@ -70,7 +75,7 @@
 
       //If term is too long
       if(!(strlen($CURRENTTERM) <= 15)) {
-        $output = "Term is too long (Term: $x) $CURRENTTERM";
+        $alert = "Term is too long (Term: $x) $CURRENTTERM";
         $errors = true;
       }
 
@@ -83,18 +88,18 @@
       }
 
       if(!preg_match($alphabet, $CURRENTTERM)) {
-        $output = "Term doesn't contain legal characters from chosen keyboard mode (Term: $x)";
+        $alert = "Term doesn't contain legal characters from chosen keyboard mode (Term: $x)";
         $errors = true;
       }
 
       //If number of attempts is less than the length of the word AND sensible length (i.e unfair)
       if($CURRENTATT < strlen($CURRENTTERM)) {
-        $output = "Number of attempts is less than the length of the Term (Term: $x)";
+        $alert = "Number of attempts is less than the length of the Term (Term: $x)";
         $errors = true;
       }
     
       if(!($CURRENTATT < 15)) {
-          $output = "Number of attempts is too large (Term: $x)";
+          $alert = "Number of attempts is too large (Term: $x)";
           $errors = true;
       }
     }
@@ -106,7 +111,7 @@
       $QUERYADD = "INSERT INTO settbl (SetName, AccID, KeyboardType, Tags) VALUES ('$SETNAME', '$ACCID', '$KEYBOARDTYPE', '$TAGS')";
 
       if(mysqli_query($CONNECT, $QUERYADD)) {
-        $output = "Set added!";
+        $alert = "Set added!";
       }
 
       //Tags added to seperate table
@@ -122,7 +127,7 @@
           $QUERYADD = "INSERT INTO tagtbl (SetID, Tag) VALUES ('$SETID', '$CURRENTTAG')";
 
           if(mysqli_query($CONNECT, $QUERYADD)) {
-            $output = "Tag ". $b ." added!";
+            $alert = "Tag ". $b ." added!";
           }
         }
       }
@@ -139,15 +144,16 @@
         $QUERYADD = "INSERT INTO termtbl (Term, SetID, Def, NumAtt) VALUES ('$CURRENTTERM', '$SETID', '$CURRENTDEF', '$CURRENTATT')";
 
         if(mysqli_query($CONNECT, $QUERYADD)) {
-          $output = "Term ". $x ." added!";
+          $alert = "Term ". $x ." added!";
         }
       }
 
 
-     echo '<script type="text/JavaScript"> 
-     alert("Set added!");
-     window.location.href = "home"
+     echo '<script src = "resources/terms.js"></script>
+     <script type="text/JavaScript"> 
+     SAVED = true;
      </script>';
+     $alert = "Set added!";
 
     }
     
@@ -189,7 +195,7 @@
 <body>
 
   <?php
-  $alert = 'Popup';
+  //$alert = 'Popup';
   if(isset($alert)){
     $alert_status = 'block';
   }
@@ -225,12 +231,18 @@
     //Close the pop-up if the user clicks it
     box.onclick = function() {
       modal.style.display = "none";
+      if(SAVED == true){
+        window.location.href = "home";
+      }
     }
 
     //Close the pop-up if the user clicks the screen anywhere
     window.onclick = function(event) {
       if((event.target == modal) || (event.target == box)) {
         modal.style.display = "none";
+        if(SAVED == true){
+          window.location.href = "home";
+        }
       }
     }
   </script>
@@ -247,10 +259,10 @@
     
       <form method = "POST" action = "<?php echo str_replace(".php","",$_SERVER["PHP_SELF"]) ?>" autocomplete="off">
 
-        <br><br>Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp
         <div class = "button">
           <input type = "submit" class = "smallbutton" id= "save" value = "Save set" name = "confirm"><br><br>
         </div>
+        Set Name:&nbsp&nbsp<input type= "text" id= "setname" name= "setname" required>&nbsp<br><br>
         Tags:&nbsp&nbsp<input type= "text" id= "tag" name= "tag1" placeholder = "Eg: OCR"> <input type= "text" id= "tag" name= "tag2" placeholder = "Eg: Physics" > <input type= "text" id= "tag" name= "tag3" placeholder = "Eg: A-Level" ><br><br>
         Keyboard Type:&nbsp&nbsp
         <select id= "keyboard" name= "keyboard" required><br>
@@ -268,8 +280,6 @@
             <input type = "button" class = "smallbutton" value = " - " id = "removeterm">
           </div>
         </div>
-        
-        <div class = "output" id = "output"><?php if(isset($output)) {echo $output;} ?></div>
       
 
       <div id = "termlist"><br>

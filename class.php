@@ -41,7 +41,7 @@
     <div class = "menuright">
         <p>
           <?php
-            echo 'Signed in as'. $_SESSION["username"];
+            echo 'Signed in as '. $_SESSION["username"];
           ?>
         </p>
     </div>
