@@ -195,22 +195,22 @@
 <body>
 
   <?php
-  //$alert = 'Popup';
-  if(isset($alert)){
-    $alert_status = 'block';
-  }
-  else{
-    ob_start();
-    $alert_status = 'none';
-    ob_end_clean();
-  }
+    //$alert = 'Popup';
+    if(isset($alert)){
+      $alert_status = 'block';
+    }
+    else{
+      ob_start();
+      $alert_status = 'none';
+      ob_end_clean();
+    }
   ?>
 
 
   <style>
-  .modal {
-    display: <?php echo $alert_status?>;
-  }
+    .modal {
+      display: <?php echo $alert_status?>;
+    }
   </style>
 
   <div id="popup" class="modal">
