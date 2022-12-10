@@ -6,7 +6,11 @@
   $CONNECT;
 
   session_start();
-  unset($output);
+  unset($alert);
+  $DESTINATION = '';
+
+  echo '<script type="text/JavaScript">var leave = false
+      </script>';
 
   //Gets values for variables from form upon completion
   if(isset($_POST["confirm"])) {
@@ -24,21 +28,22 @@
 
     //If there are no results from the database,
     if(mysqli_num_rows($SQLREAD) == 0) {
-      $output = "Incorrect Username, email or passworda";
+      $alert = "Incorrect Username, email or password";
       $errors = true;
     }
+    else{
+      //If the Usernames doesn't match,
+      if($ROW['AccName'] != $USERNAME) {
+        $alert = "Incorrect Username, email or password";
+        $errors = true;
+      }
 
-    //If the Usernames doesn't match,
-    if($ROW['AccName'] != $USERNAME) {
-      $output = "Incorrect Username, email or passwordb";
-      $errors = true;
-    }
-
-    //If the passwords doesn't match,
-    if($ROW['Password'] != $PASSWORD) {
-      $output = "Incorrect Username, email or passwordc";
-      echo $ROW['Password']. '<br>' .$PASSWORD;
-      $errors = true;
+      //If the passwords doesn't match,
+      if($ROW['Password'] != $PASSWORD) {
+        $alert = "Incorrect Username, email or password";
+        echo $ROW['Password']. '<br>' .$PASSWORD;
+        $errors = true;
+      }
     }
 
     //If no errors have occured the variables are set to the session variables
@@ -47,21 +52,18 @@
       $_SESSION["username"] = $USERNAME;
       $_SESSION["type"] = $ROW["AccType"];
       $_SESSION["loggedin"] = TRUE;
-      $output = "Signed In!";
+      $alert = "Signed In!";
 
-     //Sent to homepage/orignal destination
-     if(!isset($_SESSION["destination"])) {
-      $DESTINATION = "home";
-     }
-     else {
-      $DESTINATION = $_SESSION["destination"];
-     }
+      //Sent to homepage/orignal destination
+      if(!isset($_SESSION["destination"])) {
+        $DESTINATION = "home";
+      }
+      else {
+        $DESTINATION = $_SESSION["destination"];
+      }
 
-     echo '<script type="text/JavaScript"> 
-     alert("Signed In!");
-     window.location.href = "' . $DESTINATION . '";
-     </script>';
-     $_SESSION["destination"] = null;
+      echo '<script type="text/JavaScript">leave = true
+      </script>';
 
     }
 
@@ -102,6 +104,60 @@
 
 <body>
 
+
+  <?php
+    //$alert = 'Popup';
+    if(isset($alert)){
+      $alert_status = 'block';
+    }
+    else{
+      ob_start();
+      $alert_status = 'none';
+      ob_end_clean();
+    }
+  ?>
+
+
+  <style>
+    .modal {
+      display: <?php echo $alert_status?>;
+    }
+  </style>
+
+  <div id="popup" class="modal">
+
+    <div class="alertbox">
+      <div class="text">
+        <?php if(isset($alert)) {echo $alert;}?>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    //Set variables
+    var modal = document.getElementById("popup");
+    var box = document.getElementsByClassName("alertbox")[0];
+
+    //Close the pop-up if the user clicks it
+    box.onclick = function() {
+      modal.style.display = "none";
+      if(leave == true){
+        window.location.href = "<?php echo $DESTINATION?>";
+      }
+    }
+
+    //Close the pop-up if the user clicks the screen anywhere
+    window.onclick = function(event) {
+      if((event.target == modal) || (event.target == box)) {
+        modal.style.display = "none";
+        if(leave == true){
+          window.location.href = "<?php echo $DESTINATION?>";
+        }
+      }
+    }
+  </script>
+
   <div class = "board largeboard">
     
     <h2>
@@ -116,7 +172,6 @@
         Password:           <input type= "password" id= "password" name= "password" required><br>
         <div class = "button"><input type= "submit" class = "smallbutton" value= "Confirm" name= "confirm"></div>   <div class = "button"><input type= "reset" class = "smallbutton" required></div>
 
-        <div class="output" id="output"><?php if(isset($output)) {echo $output;} ?></div>
       </form>
     </pre>
       
