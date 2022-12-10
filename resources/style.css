@@ -48,7 +48,7 @@
     background: url(../images/logo.png);
     height: 60px;
     width: 60px;
-    padding: 10px;
+    margin: 0px 5px 10px 10px;
 }
 
 .menu .menuleft div {
@@ -133,9 +133,9 @@
     top: 50%;
     transform: translate(0,-50%);
     background: url(images/logo.png);
-    height: 40px;
-    width: 40px;
-    padding: 10px;
+    height: 60px;
+    width: 60px;
+    margin: 0px 20px 10px 10px;
 }
 
 .menusmall .menuleft div {
@@ -249,8 +249,8 @@ pre{
 
     top: 0%;
     left: 50%;
-    transform: translate(-50%, 30%);
-    position: absolute;
+    transform: translate(-50%, 200%);
+    position: relative;
     z-index: 3;
 }
 
@@ -304,8 +304,6 @@ pre{
     min-width: 250px;
     background-position: left bottom;
 }
-
-
 
 @media screen and (max-width: 565px) {
     .largeboard{
@@ -422,9 +420,9 @@ pre{
 }
 
 #save{
-    right: 10px;
+    left: 0%;
     top: 10%;
-    position: absolute;
+    position: relative;
 }
 
 footer{
