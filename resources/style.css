@@ -44,7 +44,7 @@
 .menu .menuleft .logo {
     position: absolute;
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(0,-55%);
     background: url(../images/logo.png);
     height: 60px;
     width: 60px;
@@ -100,11 +100,9 @@
 .menusmall{
     position: sticky;
     height: 60px;
-    margin: auto;
-    width: 90%;
+    margin: 15px 0px 40px -6px;
+    width: 100%;
     min-width: 350px;
-    margin-top: 20px;
-    margin-bottom: 30px;
     padding: 5px;
 
     background: var(--accent3);
@@ -171,6 +169,9 @@
 .dropdown{
     position: relative;
     display: block;
+    width: 100px;
+    height: fit-content;
+    z-index: 1;
 }
 
 .dropbutton{
@@ -258,9 +259,6 @@ pre{
     cursor: pointer;
 }
 
-.alertbox:modal{
-    display: none;
-}
 
 .board{
     box-sizing: border-box;
@@ -279,6 +277,7 @@ pre{
 .largeboard{
     padding: 10px 50px;
     min-height: 600px;
+    background-position: right bottom;
 }
 
 .homeboard{
@@ -302,13 +301,92 @@ pre{
     width: 50%;
     min-height: 800px;
     min-width: 250px;
-    background-position: left bottom;
+    background-position: left middle;
+}
+
+.headerboard{
+    position: relative;
+    margin: 0px 10px 10px 10px;
+    padding: 10px;
+    width: 85vw;
+    min-width: 370px;
+    float: left;
+    height: 100px;
+    background-position: center top;
+}
+
+.sideboard{
+    position: relative;
+    margin: 0px 5px 0px -11px;
+    float: left;
+    min-height: 80vh;
+    min-width: 150px;
+    width: 150px;
+    max-width: 150px;
+    background-position: left middle;
+}
+
+.classfeed{
+    position: relative;
+    margin: 10px;
+    float: left;
+    min-height: 85%;
+    width: 85vw;
+    min-width: 370px;
+    background-position: center top;
+}
+
+.headerboard h2 {
+    text-align: left;
+    width: fit-content;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+section{
+    display: inline-flex;
+    flex-wrap: nowrap;
+}
+
+section div {
+    min-width: 370px;
+    width: 100%;
+}
+
+section::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 750px) {
+    .sideboard {
+        display: none;
+    }
+    section div {
+        padding: 10px;
+    }
 }
 
 @media screen and (max-width: 565px) {
     .largeboard{
       padding: 10px 20px;
     }
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    word-wrap: break-word;
+}
+
+li{
+    margin-bottom: 5px; 
+}
+
+.right{
+    float: right;
+    text-align: right;
 }
 
 #termcount{

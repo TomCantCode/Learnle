@@ -50,22 +50,29 @@
 
 <body>
 
-
-  <div class = "class-section">
-
-    <div class = "board headerboard">
-
-    <div>
+  <section>
 
     <div class = "board sideboard">
+      <h2>Students</h2>
+      <ul>
+        <li>Bloke 1</li>
+        <li>Bloke sdgfffsdgddsgdssdg2</li>
+        <li>Bloke 3</li>
+      </ul>
+    </div>
 
     <div>
-    
-    <div class = "board classfeed">
+      <div class = "board headerboard">
+        <h2>Header</h2>
+        Class code:
+      </div>
 
-    <div>
-      
-  </div>
+      <div class = "board classfeed">
+        <h2>Feed</h2>
+      </div>
+    </div>
+
+  </section>
     
     
 

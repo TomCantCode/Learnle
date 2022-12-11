@@ -147,7 +147,11 @@
         risus neque molestie metus, a tempus purus nisi ut neque. Morbi ullamcorper iaculis convallis. Sed
         vitae massa efficitur nulla porta euismod sit amet a odio. Maecenas commodo justo sit amet ex
         commodo rhoncus.</p>
-     <br>image
+     <br>image<br>
+     <div class = "button">
+      <a href = "class" class = "homebutton" target = "_self">Join a Class</a>
+     </div>
+
     </div>
     
   </div>
